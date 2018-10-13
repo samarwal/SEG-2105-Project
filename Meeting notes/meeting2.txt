@@ -1,0 +1,2 @@
+we devided up the work for the project and created a diagam of each page we intent to make for this deliverable.
+we then made the project and connected everything up with the git aswell as setup firebase to be connected to the project
