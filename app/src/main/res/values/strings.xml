@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">OnDemandHomeRepair</string>
+    <string name="usernameButton">usernameButton</string>
+    <string name="passwordButton">passwordButton</string>
+    <string name="username">username</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="ConfirmPassword">ConfirmPassword</string>
+    <string name="AccountType">Select your account type from the list below:</string>
+    <string name="basicUser">Basic User</string>
+    <string name="serviceProvider">Service Provider</string>
+    <string name="admin">Admin</string>
+    <string name="login">Login</string>
+    <string name="confirm_password">Confirm Password</string>
+
+
 </resources>
