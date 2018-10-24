@@ -15,6 +15,8 @@ public class LogIn extends AppCompatActivity {
     private RadioButton radButton;
     private RadioGroup radGroup;
     private TextView errorMessage;
+    public static final String EXTRA_TEXT1 = "com.example.group.ondemandhomerepair.EXTRA_TEXT1";
+    public static final String EXTRA_TEXT2 = "com.example.group.ondemandhomerepair.EXTRA_TEXT2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,17 @@ public class LogIn extends AppCompatActivity {
     public void configureLogin(){
             //@Override
             if(statusValidate()){
-                startActivity(new Intent(LogIn.this, WelcomePage.class));
+                EditText editText1 = (EditText) findViewById(R.id.txtUser);
+                String user = editText1.getText().toString();
+
+                EditText editText2 = (EditText) findViewById(R.id.txtPass);
+                String pass = editText2.getText().toString();
+
+                Intent intent = new Intent(LogIn.this, WelcomePage.class);
+                intent.putExtra(EXTRA_TEXT1, user);
+                intent.putExtra(EXTRA_TEXT2, pass);
+                startActivity(intent);
+
             }
     }
     public boolean statusValidate(){

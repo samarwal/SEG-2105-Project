@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.content.Intent;
 
 public class WelcomePage extends AppCompatActivity {
 
@@ -22,5 +23,8 @@ public class WelcomePage extends AppCompatActivity {
             accountsList.setVisibility(View.VISIBLE);
         }
 
+        Intent intent = getIntent();
+        String user = intent.getStringExtra(LogIn.EXTRA_TEXT1);
+        String pass = intent.getStringExtra(LogIn.EXTRA_TEXT1);
     }
 }
