@@ -70,7 +70,7 @@ public class Registration extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()){
                                             Toast.makeText(Registration.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                                            //startActivity(new Intent(Registration.this, MainActivity.class));
+                                            startActivity(new Intent(Registration.this, MainActivity.class));
                                         } else {
                                             Toast.makeText(Registration.this, "Registration f", Toast.LENGTH_SHORT).show();
                                         }
