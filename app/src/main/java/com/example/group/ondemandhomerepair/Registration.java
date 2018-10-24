@@ -1,5 +1,6 @@
 package com.example.group.ondemandhomerepair;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -9,6 +10,14 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Registration extends AppCompatActivity {
     private EditText username, password, passwordConfirm;
@@ -16,50 +25,71 @@ public class Registration extends AppCompatActivity {
     private RadioButton radButton;
     private RadioGroup radGroup;
     private TextView errorMessage;
+    private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        //Get Firebase auth instance
+        mAuth = FirebaseAuth.getInstance();
+
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         passwordConfirm = findViewById(R.id.confirmPassword);
         registerButton = findViewById(R.id.registerButton);
+        radGroup = findViewById(R.id.radioGroup);
+        errorMessage = findViewById(R.id.errorMessage);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                buttonRegisterClick();
+                if (statusValidate()){
+                    String Username = username.getText().toString().trim();
+                    String Password = password.getText().toString().trim();
+                    mAuth.createUserWithEmailAndPassword(Username,Password).addOnCompleteListener(Registration.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if (task.isSuccessful()) {
+                                Toast.makeText(Registration.this, "Registration succssfull", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(Registration.this, MainActivity.class));
+                            } else {
+                                Toast.makeText(Registration.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    });
+                }
             }
         });
-        radGroup = findViewById(R.id.radioGroup);
-        errorMessage = findViewById(R.id.errorMessage);
+
     }
 
-    public void buttonRegisterClick(){
-        if(statusValidate()){
-            Intent intent = new Intent(this, LogIn.class);
-            startActivity(intent);
-        }
-    }
-    public boolean statusValidate(){
-        if (password.getText().toString().equals(passwordConfirm.getText().toString()) != true){
+    public boolean statusValidate() {
+
+        /*if (username.getText().toString().equals(passwordConfirm.getText().toString()) != true) {
             errorMessage.setText("! Passwords do not match");
             return false;
-        }
-        if (username.getText().toString().equals("")){
+        }*/
+        if (username.getText().toString().equals("")) {
             errorMessage.setText("! Username is empty");
             return false;
         }
-        if (password.getText().toString().equals("")) {
+        if (password.getText().toString().trim().equals("")) {
             errorMessage.setText("! Password is empty");
             return false;
         }
-        if (radGroup.getCheckedRadioButtonId() == -1){
-            errorMessage.setText("! Account type not selected");
+        if (password.getText().toString().trim().length() < 6) {
+            errorMessage.setText("Password too short, enter minimum 6 character");
             return false;
         }
-        else{
+        if (radGroup.getCheckedRadioButtonId() == -1) {
+            errorMessage.setText("! Account type not selected");
+            return false;
+        } else {
             radButton = findViewById(radGroup.getCheckedRadioButtonId());
         }
         //if statement for firebase account duplicates
