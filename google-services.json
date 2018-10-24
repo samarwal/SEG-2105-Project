@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "655679262657",
+    "firebase_url": "https://seg-2105-project.firebaseio.com",
+    "project_id": "seg-2105-project",
+    "storage_bucket": "seg-2105-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655679262657:android:4b2d812b9cf37d20",
+        "android_client_info": {
+          "package_name": "com.example.group.ondemandhomerepair"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655679262657-dnipk19vmo7eq2cjtno1dlmrq1oqbfub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.group.ondemandhomerepair",
+            "certificate_hash": "acd93596e503289eb59bab88d7e1d92902a514ee"
+          }
+        },
+        {
+          "client_id": "655679262657-ku4i1hithq819s232sfatcomifhdnisj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR7uT81QMCNQLx6NZ4pdNJ_8nzma7k874"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655679262657-ku4i1hithq819s232sfatcomifhdnisj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
