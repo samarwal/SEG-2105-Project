@@ -12,6 +12,7 @@
     <string name="admin">Admin</string>
     <string name="login">Login</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="Register">Register</string>
 
 
 </resources>

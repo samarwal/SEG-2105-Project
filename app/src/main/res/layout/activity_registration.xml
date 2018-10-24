@@ -11,101 +11,117 @@
     android:minWidth="0dp"
     tools:context=".Registration">
 
-    <EditText
-        android:id="@+id/editText2"
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
-        android:layout_height="43dp"
-        android:layout_marginEnd="82dp"
-        android:layout_marginLeft="88dp"
-        android:layout_marginRight="82dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioText">
+
+        <RadioButton
+            android:id="@+id/userRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginLeft="68dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="17dp"
+            android:layout_weight="1"
+            android:duplicateParentState="false"
+            android:text="@string/basicUser"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioText" />
+
+        <RadioButton
+            android:id="@+id/passwordRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="68dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="21dp"
+            android:layout_weight="1"
+            android:text="@string/serviceProvider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userRadioButton" />
+
+        <RadioButton
+            android:id="@+id/conPassRadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="68dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="17dp"
+            android:layout_weight="1"
+            android:text="@string/admin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordRadioButton" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginEnd="83dp"
+        android:layout_marginLeft="86dp"
+        android:layout_marginRight="83dp"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="Enter Username"
         android:inputType="textPersonName"
-        android:text="@string/Username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Username" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginLeft="85dp"
         android:layout_marginStart="85dp"
         android:layout_marginTop="35dp"
         android:ems="10"
+        android:hint="Enter Password"
         android:inputType="textPassword"
-        android:text="@string/Password"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        tools:text="Password" />
-
-    <RadioButton
-        android:id="@+id/radioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="29dp"
-        android:layout_marginLeft="68dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="17dp"
-        android:text="@string/basicUser"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/confirmPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="85dp"
         android:layout_marginStart="85dp"
         android:layout_marginTop="35dp"
         android:ems="10"
+        android:hint="Re-enter Password"
         android:inputType="textPassword"
-        android:text="@string/confirm_password"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
-        tools:text="@string/ConfirmPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="282dp"
-        android:layout_height="18dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="24dp"
+        android:id="@+id/radioText"
+        android:layout_width="281dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="18dp"
         android:text="@string/AccountType"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
-
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="68dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="21dp"
-        android:text="@string/serviceProvider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton" />
-
-    <RadioButton
-        android:id="@+id/radioButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="68dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="17dp"
-        android:text="@string/admin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
 
     <Button
-        android:id="@+id/button7"
-        android:layout_width="120dp"
+        android:id="@+id/registerButton"
+        android:layout_width="385dp"
         android:layout_height="74dp"
-        android:text="@string/login"
+        android:text="@string/Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
