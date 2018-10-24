@@ -92,6 +92,7 @@ public class LogIn extends AppCompatActivity {
 
                 }else{
                     Toast.makeText(LogIn.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                    errorMessage.setText("");
                 }
             }
         });
