@@ -40,15 +40,11 @@ public class LogIn extends AppCompatActivity {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        /*if(user !=null){
-            finish();
-            startActivity (new Intent(LogIn.this, WelcomePage.class) );
-        }*/
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                validate(username.getText().toString(), password.getText().toString());
+                configureLogin();
             }
         });
     }
@@ -62,13 +58,10 @@ public class LogIn extends AppCompatActivity {
                 EditText editText2 = (EditText) findViewById(R.id.txtPass);
                 String pass = editText2.getText().toString();
 
-                Intent intent = new Intent(LogIn.this, WelcomePage.class);
-                intent.putExtra(EXTRA_TEXT1, user);
-                intent.putExtra(EXTRA_TEXT2, pass);
-                startActivity(intent);
-
+                validate(username.getText().toString(), password.getText().toString());
             }
     }
+
     public boolean statusValidate(){
         if(username.getText().toString().equals("")){
             errorMessage.setText("! Username is empty");
@@ -90,7 +83,7 @@ public class LogIn extends AppCompatActivity {
 
     public void validate(String userName, String userPassword){
 
-        firebaseAuth.createUserWithEmailAndPassword(userName,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(userName,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
