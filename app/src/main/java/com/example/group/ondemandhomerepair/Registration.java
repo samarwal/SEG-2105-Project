@@ -8,12 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 public class Registration extends AppCompatActivity {
     private EditText username, password, passwordConfirm;
     private Button registerButton;
     private RadioButton radButton;
     private RadioGroup radGroup;
+    private TextView errorMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class Registration extends AppCompatActivity {
             }
         });
         radGroup = findViewById(R.id.radioGroup);
-
+        errorMessage = findViewById(R.id.errorMessage);
     }
 
     public void buttonRegisterClick(){
@@ -42,15 +44,19 @@ public class Registration extends AppCompatActivity {
     }
     public boolean statusValidate(){
         if (password.getText().toString().equals(passwordConfirm.getText().toString()) != true){
+            errorMessage.setText("! Passwords do not match");
             return false;
         }
         if (username.getText().toString().equals("")){
+            errorMessage.setText("! Username is empty");
             return false;
         }
         if (password.getText().toString().equals("")) {
+            errorMessage.setText("! Password is empty");
             return false;
         }
         if (radGroup.getCheckedRadioButtonId() == -1){
+            errorMessage.setText("! Account type not selected");
             return false;
         }
         else{
