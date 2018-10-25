@@ -1,8 +1,5 @@
 # SEG-2105-Project
 
-Repository for On-Demand Home Repair App
-=================================================
-
 Repository URL:
 https://github.com/samarwal/SEG-2105-Project
 
