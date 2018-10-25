@@ -1,6 +1,6 @@
 # SEG-2105-Project
 
-Repository for On-Demand Home Repair Services App
+Repository for On-Demand Home Repair App
 =================================================
 
 Repository URL:
@@ -10,8 +10,7 @@ https://github.com/samarwal/SEG-2105-Project
 Developers
 ----------
 
-Samarth Agarwal <sagar094@uottawa.ca>
-
+Samarth Agarwal <sagar094@uottawa.ca> , Theo, Logan, John, Ben
 
 
 
