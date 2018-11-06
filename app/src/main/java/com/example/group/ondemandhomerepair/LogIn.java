@@ -40,15 +40,11 @@ public class LogIn extends AppCompatActivity {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        /*if(user !=null){
-            finish();
-            startActivity (new Intent(LogIn.this, WelcomePage.class) );
-        }*/
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                validate(username.getText().toString(), password.getText().toString());
+                configureLogin();
             }
         });
     }
@@ -59,16 +55,17 @@ public class LogIn extends AppCompatActivity {
                 EditText editText1 = (EditText) findViewById(R.id.txtUser);
                 String user = editText1.getText().toString();
 
+                int selectedRadio = radGroup.getCheckedRadioButtonId();
+                RadioButton selectedType = (RadioButton)findViewById(selectedRadio);
+                String Type = selectedType.getText().toString();
+
                 EditText editText2 = (EditText) findViewById(R.id.txtPass);
                 String pass = editText2.getText().toString();
 
-                Intent intent = new Intent(LogIn.this, WelcomePage.class);
-                intent.putExtra(EXTRA_TEXT1, user);
-                intent.putExtra(EXTRA_TEXT2, pass);
-                startActivity(intent);
-
+                validate(username.getText().toString(), password.getText().toString(), Type);
             }
     }
+
     public boolean statusValidate(){
         if(username.getText().toString().equals("")){
             errorMessage.setText("! Username is empty");
@@ -88,17 +85,21 @@ public class LogIn extends AppCompatActivity {
         return true;
     }
 
-    public void validate(String userName, String userPassword){
+    public void validate(final String userName, String userPassword, final String userType){
 
-        firebaseAuth.createUserWithEmailAndPassword(userName,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(userName,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(LogIn.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    startActivity (new Intent(LogIn.this, WelcomePage.class) );
+                    Intent intent = new Intent(LogIn.this, WelcomePage.class);
+                    intent.putExtra(EXTRA_TEXT1, userName);
+                    intent.putExtra(EXTRA_TEXT2, userType);
+                    startActivity (intent);
 
                 }else{
                     Toast.makeText(LogIn.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                    errorMessage.setText("");
                 }
             }
         });

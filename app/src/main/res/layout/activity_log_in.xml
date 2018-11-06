@@ -8,47 +8,55 @@
 
     <EditText
         android:id="@+id/txtUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="229dp"
+        android:layout_height="71dp"
+        android:layout_marginLeft="79dp"
+        android:layout_marginStart="79dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblUser" />
-
-    <EditText
-        android:id="@+id/txtPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblPass" />
 
     <TextView
         android:id="@+id/lblUser"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="137dp"
+        android:layout_height="21dp"
+        android:layout_marginLeft="156dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="72dp"
         android:text="USERNAME"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtPass"
+        android:layout_width="228dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="33dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="76dp"
+        android:layout_marginStart="80dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblPass" />
 
     <TextView
         android:id="@+id/lblPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="71dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="35dp"
         android:text="PASSWORD"
+        app:layout_constraintBottom_toTopOf="@+id/txtPass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblUserError" />
+        app:layout_constraintTop_toBottomOf="@+id/txtUser" />
 
     <TextView
         android:id="@+id/lblUserError"
@@ -59,6 +67,21 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="51dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="23dp"
+        android:text="Select your registered account type:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPass" />
 
     <TextView
         android:id="@+id/lblPassError"
@@ -73,25 +96,23 @@
     <Button
         android:id="@+id/btnLogIn"
         android:layout_width="404dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="76dp"
+        android:layout_height="131dp"
+        android:layout_marginTop="30dp"
         android:text="log-in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupLogin"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/errorMessageLogin" />
 
     <RadioGroup
         android:id="@+id/radioGroupLogin"
         android:layout_width="263dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="29dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblPassError">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <RadioButton
             android:id="@+id/rbProvider"
@@ -121,14 +142,11 @@
     <TextView
         android:id="@+id/errorMessageLogin"
         android:layout_width="202dp"
-        android:layout_height="26dp"
-        android:layout_marginBottom="51dp"
-        android:layout_marginLeft="88dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="64dp"
+        android:layout_height="27dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="12dp"
         android:textColor="@android:color/holo_red_light"
-        app:layout_constraintBottom_toTopOf="@+id/lblUser"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/lblPassError" />
 </android.support.constraint.ConstraintLayout>
