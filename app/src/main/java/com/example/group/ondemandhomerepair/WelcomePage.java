@@ -21,7 +21,7 @@ public class WelcomePage extends AppCompatActivity {
         Button addServiceButton = (Button)findViewById(R.id.addServiceButt);    // find admin buttons and set to invisible
         addServiceButton.setVisibility(View.GONE);
 
-        Button deleteServiceButton = (Button)findViewById(R.id.deleteServiceButt);
+        Button deleteServiceButton = (Button)findViewById(R.id.deletingServiceButt);
         deleteServiceButton.setVisibility(View.GONE);
 
         Button editServiceButton = (Button)findViewById(R.id.editServiceButt);

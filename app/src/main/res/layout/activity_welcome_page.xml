@@ -79,12 +79,12 @@
         android:layout_marginTop="118dp"
         android:text="add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/deleteServiceButt"
+        app:layout_constraintEnd_toStartOf="@+id/deletingServiceButt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accountList" />
 
     <Button
-        android:id="@+id/deleteServiceButt"
+        android:id="@+id/deletingServiceButt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="95dp"
@@ -109,6 +109,6 @@
         android:text="edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/deleteServiceButt"
+        app:layout_constraintStart_toEndOf="@+id/deletingServiceButt"
         app:layout_constraintTop_toBottomOf="@+id/accountList" />
 </android.support.constraint.ConstraintLayout>

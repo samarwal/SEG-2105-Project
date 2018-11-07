@@ -19,7 +19,8 @@
         <activity android:name=".Registration" />
         <activity android:name=".LogIn" />
         <activity android:name=".WelcomePage" />
-        <activity android:name=".AddServicePage"></activity>
+        <activity android:name=".AddServicePage" />
+        <activity android:name=".DeletingServicePage"></activity>
     </application>
 
 </manifest>
