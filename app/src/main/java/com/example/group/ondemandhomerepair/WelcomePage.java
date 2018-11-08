@@ -38,8 +38,41 @@ public class WelcomePage extends AppCompatActivity {
         if(userType.getText().equals("Admin")){                             // admin tools show when admin is logged in
             accountsList.setVisibility(View.VISIBLE);
             addServiceButton.setVisibility(View.VISIBLE);
+
+            addServiceButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    openAddServices();
+                }
+            });
+
             deleteServiceButton.setVisibility(View.VISIBLE);
+            deleteServiceButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    openDeleteServices();
+                }
+            });
             editServiceButton.setVisibility(View.VISIBLE);
+            editServiceButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    openEditServices();
+                }
+            });
         }
+
+    }
+    public void openAddServices(){
+        Intent intent = new Intent(this, AddServicePage.class);
+        startActivity(intent);
+    }
+    public void openDeleteServices(){
+        Intent intent = new Intent(this, DeletingServicePage.class);
+        startActivity(intent);
+    }
+    public void openEditServices(){
+        Intent intent = new Intent(this, EditServicePage.class);
+        startActivity(intent);
     }
 }
