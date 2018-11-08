@@ -35,7 +35,6 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Service Name"
         app:layout_constraintBottom_toTopOf="@+id/serviceWageText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +52,6 @@
         android:layout_marginTop="25dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Serivce Rate"
         app:layout_constraintBottom_toTopOf="@+id/addingServiceButt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,4 +72,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/serviceWageText" />
+
+    <TextView
+        android:id="@+id/addServiceNameText"
+        android:layout_width="142dp"
+        android:layout_height="24dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginEnd="121dp"
+        android:layout_marginLeft="121dp"
+        android:layout_marginRight="121dp"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="15dp"
+        android:text="Service Name"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/serviceNameText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addServiceTitle" />
+
+    <TextView
+        android:id="@+id/addServiceRateText"
+        android:layout_width="134dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginLeft="125dp"
+        android:layout_marginRight="125dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="17dp"
+        android:text="Service Rate"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/serviceWageText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serviceNameText" />
+
+    <TextView
+        android:id="@+id/RateText"
+        android:layout_width="51dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="290dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="251dp"
+        android:text="$/hour"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/serviceWageText"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
