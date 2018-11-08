@@ -49,7 +49,9 @@ public class AddServicePage extends AppCompatActivity {
             errorMessage.setText("! Password is empty");
             return false;
         }
-        
+        if (!rate.getText().toString().trim().matches( "[0-9]+")){
+            return false;
+        }
 
         //if statement for firebase account duplicates
         //Use Object.getText.toString to compare with any string values in the database for username, password, and radioButton string.
