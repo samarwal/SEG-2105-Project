@@ -35,7 +35,7 @@ public class WelcomePage extends AppCompatActivity {
         userName.setText(intent.getStringExtra(LogIn.EXTRA_TEXT1));           // get username from EXTRA_TEXT1 of intent
         userType.setText(intent.getStringExtra(LogIn.EXTRA_TEXT2));           // get userType from EXTRA_TEXT@ of intent
 
-        if(userName.getText().equals("admin")){                             // admin tools show when admin is logged in
+        if(userType.getText().equals("Admin")){                             // admin tools show when admin is logged in
             accountsList.setVisibility(View.VISIBLE);
             addServiceButton.setVisibility(View.VISIBLE);
             deleteServiceButton.setVisibility(View.VISIBLE);
