@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddServicePage">
+
+    <TextView
+        android:id="@+id/addServiceTitle"
+        android:layout_width="201dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginLeft="105dp"
+        android:layout_marginRight="78dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="47dp"
+        android:text="Adding Services"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/serviceNameText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/serviceNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="42dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginRight="85dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Service Name"
+        app:layout_constraintBottom_toTopOf="@+id/serviceWageText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addServiceTitle" />
+
+    <EditText
+        android:id="@+id/serviceWageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="53dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginRight="85dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Serivce Rate"
+        app:layout_constraintBottom_toTopOf="@+id/addingServiceButt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serviceNameText" />
+
+    <Button
+        android:id="@+id/addingServiceButt"
+        android:layout_width="182dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="161dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginLeft="101dp"
+        android:layout_marginRight="101dp"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="32dp"
+        android:text="Add Service"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serviceWageText" />
+</android.support.constraint.ConstraintLayout>

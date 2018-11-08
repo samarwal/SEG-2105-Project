@@ -90,10 +90,10 @@ public class Registration extends AppCompatActivity {
 
     public boolean statusValidate() {
 
-        /*if (username.getText().toString().equals(passwordConfirm.getText().toString()) != true) {
+        if (password.getText().toString().equals(passwordConfirm.getText().toString()) != true) {
             errorMessage.setText("! Passwords do not match");
             return false;
-        }*/
+        }
         if (username.getText().toString().equals("")) {
             errorMessage.setText("! Username is empty");
             return false;
