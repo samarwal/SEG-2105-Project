@@ -33,10 +33,6 @@ public class AddServicePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_service_page);
 
-        Button addingButton =(Button)findViewById(R.id.addingServiceButt);
-
-        mAuth = FirebaseAuth.getInstance();
-
         name = findViewById(R.id.serviceNameText);
         rate = findViewById(R.id.serviceWageText);
         addingServiceButt = findViewById(R.id.addingServiceButt);
@@ -69,19 +65,18 @@ public class AddServicePage extends AppCompatActivity {
                 }
             }
         });
-
-
+        
     }
 
     public boolean statusValidate() {
 
 
         if (name.getText().toString().equals("")) {
-            errorMessage.setText("! Username is empty");
+            errorMessage.setText("! name is empty");
             return false;
         }
         if (rate.getText().toString().trim().equals("")) {
-            errorMessage.setText("! Password is empty");
+            errorMessage.setText("! hourly rate is empty");
             return false;
         }
         if (!rate.getText().toString().trim().matches( "[0-9]+")){
