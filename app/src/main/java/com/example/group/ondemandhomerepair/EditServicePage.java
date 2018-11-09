@@ -27,6 +27,7 @@ public class EditServicePage extends AppCompatActivity {
     private Spinner serviceList;
     List<String> services;
     String id;
+    DatabaseReference serviceRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +40,8 @@ public class EditServicePage extends AppCompatActivity {
         serviceList = (Spinner)findViewById(R.id.spinner2);
         services = new ArrayList<String>();
         id = "";
-        final DatabaseReference serviceRef;
 
-        //Note This is the Spinner Fill From Bens Code
+        //Note This is the Spinner Fill From DeletingServices Code
         FirebaseDatabase.getInstance().getReference().child("services").addListenerForSingleValueEvent( // fill the list with services
                 new ValueEventListener() {
                     @Override
@@ -64,7 +64,7 @@ public class EditServicePage extends AppCompatActivity {
         //End of Spinner fill
 
 
-        //THIS IS THE MAIN SECTION THAT NEEDS WORK. A BUTTON OR EVENT TO RELOAD REDO FOLLOWING EVERY TIME SPINNER IS CHANGED.
+        //THIS IS THE MAIN SECTION THAT NEEDS WORK. A BUTTON OR EVENT TO RELOAD REDO THE FOLLOWING EVERY TIME SPINNER IS CHANGED.
         //RETREIVAL OF DATA FROM FIREBASE REFERENCES NEEDS TO BE IMPLEMENTED. DIRECT getValue DOES NOT EXIST.
         //EVENTLISTENERS ARE CONFUSING
         String id = String.valueOf(serviceList.getSelectedItem());
