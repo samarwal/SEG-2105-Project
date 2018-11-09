@@ -30,15 +30,17 @@ public class DeletingServicePage extends AppCompatActivity {
         setContentView(R.layout.activity_deleting_service_page);
 
         final Spinner serviceList = (Spinner)findViewById(R.id.servicesSpinner);
-        final List<String> services = new ArrayList<String>();                    // create a list and fill the spinner with list contents
+        final ArrayList<String> services = new ArrayList<String>();             // create a list and fill the spinner with list contents
 
-       FirebaseDatabase.getInstance().getReference().child("services").addListenerForSingleValueEvent( // fill the list with services
+       FirebaseDatabase.getInstance().getReference().child("Services").addListenerForSingleValueEvent( // fill the list with services
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         //Get map of users in datasnapshot
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                            services.add(String.valueOf(dsp.getValue()));
+                            Service temp = new Service("a",0);
+                            temp.setServiceName(String.valueOf(dsp.child("serviceName").getValue()));
+                            services.add(temp.getServiceName());
                         }
                     }
                     @Override
@@ -50,14 +52,15 @@ public class DeletingServicePage extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(                // fill the spinner in the page with contents
                 this, android.R.layout.simple_spinner_item, services);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        serviceList.setAdapter(adapter);
+        serviceList.setAdapter(adapter);                                   // set spinner adapter to adapter with contents
 
-        Button deletingButton = (Button)findViewById(R.id.deletingServiceButt);
+        Button deletingButton = (Button)findViewById(R.id.deletingServiceButt);     // deleting services section
         deletingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 String b = String.valueOf(serviceList.getSelectedItem());
-                DatabaseReference a = FirebaseDatabase.getInstance().getReference("service").child(b);
+                System.out.print(b);
+                DatabaseReference a = FirebaseDatabase.getInstance().getReference("Service").child(b);
                 a.removeValue();
             }
         });
