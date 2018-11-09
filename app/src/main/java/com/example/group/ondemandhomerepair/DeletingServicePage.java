@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -28,7 +29,7 @@ public class DeletingServicePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deleting_service_page);
 
-        Spinner serviceList = (Spinner)findViewById(R.id.servicesSpinner);
+        final Spinner serviceList = (Spinner)findViewById(R.id.servicesSpinner);
         final List<String> services = new ArrayList<String>();                    // create a list and fill the spinner with list contents
 
        FirebaseDatabase.getInstance().getReference().child("services").addListenerForSingleValueEvent( // fill the list with services
@@ -55,7 +56,9 @@ public class DeletingServicePage extends AppCompatActivity {
         deletingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                // method for deleting from firbase here
+                String b = String.valueOf(serviceList.getSelectedItem());
+                DatabaseReference a = FirebaseDatabase.getInstance().getReference("service").child(b);
+                a.removeValue();
             }
         });
     }
