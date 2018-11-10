@@ -28,8 +28,8 @@ import java.util.*;
 
 public class DeletingServicePage extends AppCompatActivity {
 
-    TextView errorMessage = (TextView)findViewById(R.id.errorText);
-    EditText baseName = (EditText)findViewById(R.id.deleteServiceText);
+    TextView errorMessage;
+    EditText baseName;
     Service service;
     DatabaseReference serviceRef;
     String ref;
@@ -40,6 +40,8 @@ public class DeletingServicePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deleting_service_page);
 
+        final TextView errorMessage = (TextView)findViewById(R.id.errorText);
+        final EditText baseName = (EditText)findViewById(R.id.deleteServiceText);
         final Spinner serviceList = (Spinner)findViewById(R.id.servicesSpinner);
         final ArrayList<String> services = new ArrayList<String>();             // create a list and fill the spinner with list contents
 
@@ -83,7 +85,7 @@ public class DeletingServicePage extends AppCompatActivity {
                                 }
                                 if (statusValidate()) {
                                     serviceRef.removeValue();
-                                    errorMessage.setText("Removal Successful!");
+                                    //errorMessage.setText("Removal Successful!");
                                     ref = "";
 
                                 }
@@ -106,7 +108,7 @@ public class DeletingServicePage extends AppCompatActivity {
             return false;
         }
 
-        errorMessage.setText("");
+       errorMessage.setText("");
         return true;
     }
 }

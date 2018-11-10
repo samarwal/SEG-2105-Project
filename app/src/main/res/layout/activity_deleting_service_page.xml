@@ -27,13 +27,14 @@
         android:id="@+id/servicesSpinner"
         android:layout_width="308dp"
         android:layout_height="40dp"
+        android:layout_marginBottom="11dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/deletingServiceButt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="346dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/deletingServiceButt"
@@ -63,7 +64,6 @@
         android:layout_marginRight="98dp"
         android:layout_marginStart="98dp"
         android:layout_marginTop="83dp"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -75,17 +75,30 @@
         android:id="@+id/deleteServiceText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="113dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginLeft="85dp"
+        android:layout_marginRight="84dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="21dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="187dp" />
+        app:layout_constraintBottom_toTopOf="@+id/servicesSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="133dp"
         android:layout_height="23dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginLeft="126dp"
+        android:layout_marginRight="125dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="64dp"
         android:text="Serivce Name:"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="143dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteServiceTitle" />
 </android.support.constraint.ConstraintLayout>
