@@ -27,6 +27,6 @@ public class Service {
     }
 
     public String toString(){
-        return "Service: "+this.name+"| Hourly Rate: "+this.hourlyRate;
+        return "Service: "+this.name+" | Hourly Rate: "+this.hourlyRate;
     }
 }
