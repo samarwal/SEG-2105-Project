@@ -27,8 +27,8 @@ public class EditServicePage extends AppCompatActivity {
     private TextView errorMessage;
     private Spinner serviceList;
     List<String> services;
-    String id;
     DatabaseReference serviceRef;
+    String ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class EditServicePage extends AppCompatActivity {
         editServiceButt = findViewById(R.id.editServiceButt);
         serviceList = (Spinner)findViewById(R.id.spinner2);
         services = new ArrayList<String>();
-        id = "";
+        ref = "";
 
         //Note This is the Spinner Fill From DeletingServices Code
 
@@ -50,15 +50,17 @@ public class EditServicePage extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         //Get map of users in datasnapshot
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                            Service temp = new Service("a",0);
-                            temp.setServiceName(String.valueOf(dsp.child("serviceName").getValue()));
-                            services.add(temp.getServiceName());
+                            //Service temp = new Service("",0);
+                            //temp.setServiceName(String.valueOf(dsp.child("serviceName").getValue()));
+                            //temp.setHourlyRate(Integer.valueOf(String.valueOf(dsp.child("hourlyRate").getValue())));
+                            services.add(String.valueOf(dsp.getKey()));
                         }
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         //handle databaseError
                     }
+
                 });
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(                // fill the spinner in the page with contents
@@ -66,28 +68,30 @@ public class EditServicePage extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         serviceList.setAdapter(adapter);
         //End of Spinner fill
-
-
         //All thats left is making sure the spinner ID reffered by variable REF correlates to the Service Object in Firebase.
         serviceList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
+            @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String ref = String.valueOf(serviceList.getSelectedItem()); //Reference String
-                serviceRef = FirebaseDatabase.getInstance().getReference("service").child(ref);
+                ref = String.valueOf(serviceList.getSelectedItem()); //Reference String
+                serviceRef = FirebaseDatabase.getInstance().getReference().child("Services").child(ref);
+                //name.setText("Nope"); //TESTING
                 serviceRef.addListenerForSingleValueEvent(
                         new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 service = new Service(String.valueOf(dataSnapshot.child("serviceName").getValue()), Integer.valueOf(String.valueOf(dataSnapshot.child("hourlyRate"))));
                                 name.setText(service.getServiceName());
+                                name.setText("Nope");
                                 rate.setText(String.valueOf(service.getHourlyRate()));
                             }
-
+                            @Override
                             public void onCancelled(DatabaseError databaseError) {
                                 //handle databaseError
                             }
                         });
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+                ref = "";
             }
         });
 
@@ -110,7 +114,7 @@ public class EditServicePage extends AppCompatActivity {
     }
 
     public boolean statusValidate(){
-            if (id == ""){
+            if (ref == ""){
                 errorMessage.setText("! service was not chosen");
                 return false;
             }

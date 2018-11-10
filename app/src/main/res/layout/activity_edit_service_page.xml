@@ -88,15 +88,15 @@
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="368dp"
-            android:layout_height="wrap_content"
+            android:layout_height="21dp"
             android:layout_marginBottom="12dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="44dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/editServiceNameText"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/EditServiceTitle" />
 
@@ -116,7 +116,7 @@
 
         <TextView
             android:id="@+id/errorMessageEdit"
-            android:layout_width="76dp"
+            android:layout_width="219dp"
             android:layout_height="26dp"
             android:layout_marginBottom="15dp"
             android:layout_marginStart="92dp"
