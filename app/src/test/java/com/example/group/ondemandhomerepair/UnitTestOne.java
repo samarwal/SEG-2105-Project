@@ -1,9 +1,6 @@
 package com.example.group.ondemandhomerepair;
 
 import org.junit.Test;
-
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 public class UnitTestOne {
@@ -12,7 +9,7 @@ public class UnitTestOne {
 
 
     @Test
-    public void doesExist(){
+    public void isInitialized(){
         assertNotNull(servTest);
     }
 
