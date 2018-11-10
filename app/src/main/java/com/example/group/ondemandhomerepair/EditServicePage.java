@@ -24,6 +24,7 @@ public class EditServicePage extends AppCompatActivity {
     private Service service;
     private EditText name;
     private EditText rate;
+    private EditText baseName;
     private TextView errorMessage;
     private Spinner serviceList;
     List<String> services;
@@ -36,6 +37,7 @@ public class EditServicePage extends AppCompatActivity {
         setContentView(R.layout.activity_edit_service_page);
         name = findViewById(R.id.editServiceNameText);
         rate = findViewById(R.id.editServiceWageText);
+        baseName = findViewById(R.id.editBaseName);
         errorMessage = findViewById(R.id.errorMessageEdit);
         editServiceButt = findViewById(R.id.editServiceButt);
         serviceList = (Spinner)findViewById(R.id.spinner2);
@@ -50,10 +52,11 @@ public class EditServicePage extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         //Get map of users in datasnapshot
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                            //Service temp = new Service("",0);
-                            //temp.setServiceName(String.valueOf(dsp.child("serviceName").getValue()));
+                            Service temp = new Service("",0);
+                            temp.setServiceName(String.valueOf(dsp.child("serviceName").getValue()));
                             //temp.setHourlyRate(Integer.valueOf(String.valueOf(dsp.child("hourlyRate").getValue())));
-                            services.add(String.valueOf(dsp.getKey()));
+                            //services.add(String.valueOf(dsp.getKey()));
+                            services.add(temp.getServiceName());
                         }
                     }
                     @Override
@@ -64,11 +67,11 @@ public class EditServicePage extends AppCompatActivity {
                 });
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(                // fill the spinner in the page with contents
-                this, android.R.layout.simple_spinner_item, services);
+                this,android.R.layout.simple_spinner_item , services );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         serviceList.setAdapter(adapter);
         //End of Spinner fill
-        //All thats left is making sure the spinner ID reffered by variable REF correlates to the Service Object in Firebase.
+        /*
         serviceList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -94,7 +97,7 @@ public class EditServicePage extends AppCompatActivity {
                 ref = "";
             }
         });
-
+        */
 
 
         //
@@ -103,19 +106,42 @@ public class EditServicePage extends AppCompatActivity {
         editServiceButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                if (statusValidate()){
-                   service.setServiceName(name.getText().toString().trim());
-                   service.setHourlyRate(Integer.valueOf(rate.getText().toString().trim()));
-                   serviceRef.child("serviceName").setValue(service.getServiceName());
-                   serviceRef.child("hourlyRate").setValue(service.getHourlyRate());
-                }
+                FirebaseDatabase.getInstance().getReference().child("Services").addListenerForSingleValueEvent( // fill the list with services
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                //Get map of users in datasnapshot
+                                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                                    if (String.valueOf(dsp.child("serviceName").getValue()).equals(baseName.getText().toString().trim())) {
+                                        ref = dsp.getKey();
+                                        serviceRef = FirebaseDatabase.getInstance().getReference().child("Services").child(ref);
+
+                                    }
+                                }
+                                if (statusValidate()) {
+                                    service = new Service(name.getText().toString().trim(), Integer.valueOf(rate.getText().toString().trim()));
+                                    serviceRef.child("serviceName").setValue(service.getServiceName());
+                                    serviceRef.child("hourlyRate").setValue(service.getHourlyRate());
+                                    errorMessage.setText("Editing Successful!");
+                                    ref = "";
+
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                //handle databaseError
+                            }
+
+                        });
+
+
             }
         });
     }
 
     public boolean statusValidate(){
             if (ref == ""){
-                errorMessage.setText("! service was not chosen");
+                errorMessage.setText("! service(before) does not exist");
                 return false;
             }
             if (name.getText().toString().trim().equals("")) {
@@ -130,6 +156,7 @@ public class EditServicePage extends AppCompatActivity {
                 errorMessage.setText("! wage is non-numeric");
                 return false;
             }
+            errorMessage.setText("");
             return true;
     }
 }
