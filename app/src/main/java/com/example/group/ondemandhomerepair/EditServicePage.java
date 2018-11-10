@@ -3,6 +3,7 @@ package com.example.group.ondemandhomerepair;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,13 +43,16 @@ public class EditServicePage extends AppCompatActivity {
         id = "";
 
         //Note This is the Spinner Fill From DeletingServices Code
-        FirebaseDatabase.getInstance().getReference().child("services").addListenerForSingleValueEvent( // fill the list with services
+
+        FirebaseDatabase.getInstance().getReference().child("Services").addListenerForSingleValueEvent( // fill the list with services
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         //Get map of users in datasnapshot
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                            services.add(String.valueOf(dsp.getValue()));
+                            Service temp = new Service("a",0);
+                            temp.setServiceName(String.valueOf(dsp.child("serviceName").getValue()));
+                            services.add(temp.getServiceName());
                         }
                     }
                     @Override
@@ -64,16 +68,30 @@ public class EditServicePage extends AppCompatActivity {
         //End of Spinner fill
 
 
-        //THIS IS THE MAIN SECTION THAT NEEDS WORK. A BUTTON OR EVENT TO RELOAD REDO THE FOLLOWING EVERY TIME SPINNER IS CHANGED.
-        //RETREIVAL OF DATA FROM FIREBASE REFERENCES NEEDS TO BE IMPLEMENTED. DIRECT getValue DOES NOT EXIST.
-        //EVENTLISTENERS ARE CONFUSING
-        String id = String.valueOf(serviceList.getSelectedItem());
-        serviceRef = FirebaseDatabase.getInstance().getReference("service").child(id);
-        //DatabaseReference nameRef = serviceRef.child("serviceName");
-        //DatabaseReference wageRef = serviceRef.child("hourlyRate");
-        //service = new Service(nameRef,wageRef);
-        //name.setText(service.getServiceName());
-        //rate.setText(service.getHourlyRate());
+        //All thats left is making sure the spinner ID reffered by variable REF correlates to the Service Object in Firebase.
+        serviceList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String ref = String.valueOf(serviceList.getSelectedItem()); //Reference String
+                serviceRef = FirebaseDatabase.getInstance().getReference("service").child(ref);
+                serviceRef.addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                service = new Service(String.valueOf(dataSnapshot.child("serviceName").getValue()), Integer.valueOf(String.valueOf(dataSnapshot.child("hourlyRate"))));
+                                name.setText(service.getServiceName());
+                                rate.setText(String.valueOf(service.getHourlyRate()));
+                            }
+
+                            public void onCancelled(DatabaseError databaseError) {
+                                //handle databaseError
+                            }
+                        });
+            }
+        });
+
+
 
         //
 
