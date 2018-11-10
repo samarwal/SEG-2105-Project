@@ -27,22 +27,19 @@
         android:id="@+id/servicesSpinner"
         android:layout_width="308dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="33dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="206dp"
-        app:layout_constraintBottom_toTopOf="@+id/deletingServiceButt"
+        android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteServiceTitle" />
+        tools:layout_editor_absoluteY="346dp" />
 
     <Button
         android:id="@+id/deletingServiceButt"
         android:layout_width="135dp"
         android:layout_height="54dp"
-        android:layout_marginBottom="155dp"
+        android:layout_marginBottom="116dp"
         android:layout_marginEnd="125dp"
         android:layout_marginLeft="124dp"
         android:layout_marginRight="125dp"
@@ -51,7 +48,44 @@
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/servicesList"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="188dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="43dp"
+        android:layout_marginEnd="98dp"
+        android:layout_marginLeft="98dp"
+        android:layout_marginRight="98dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="83dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deletingServiceButt"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/deleteServiceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="187dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="133dp"
+        android:layout_height="23dp"
+        android:text="Serivce Name:"
+        tools:layout_editor_absoluteX="126dp"
+        tools:layout_editor_absoluteY="143dp" />
 </android.support.constraint.ConstraintLayout>

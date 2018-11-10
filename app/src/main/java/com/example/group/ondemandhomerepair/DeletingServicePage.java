@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,10 +21,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+import org.w3c.dom.Text;
+
 import java.util.*;
 
 
 public class DeletingServicePage extends AppCompatActivity {
+
+    TextView errorMessage = (TextView)findViewById(R.id.errorText);
+    EditText baseName = (EditText)findViewById(R.id.deleteServiceText);
+    Service service;
+    DatabaseReference serviceRef;
+    String ref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +69,44 @@ public class DeletingServicePage extends AppCompatActivity {
         deletingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                String b = String.valueOf(serviceList.getSelectedItem());
-                System.out.print(b);
-                DatabaseReference a = FirebaseDatabase.getInstance().getReference("Service").child(b);
-                a.removeValue();
+                FirebaseDatabase.getInstance().getReference().child("Services").addListenerForSingleValueEvent( // fill the list with services
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                //Get map of users in datasnapshot
+                                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                                    if (String.valueOf(dsp.child("serviceName").getValue()).equals(baseName.getText().toString().trim())) {
+                                        ref = dsp.getKey();
+                                        serviceRef = FirebaseDatabase.getInstance().getReference().child("Services").child(ref);
+
+                                    }
+                                }
+                                if (statusValidate()) {
+                                    serviceRef.removeValue();
+                                    errorMessage.setText("Removal Successful!");
+                                    ref = "";
+
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                //handle databaseError
+                            }
+
+                        });
+
+
             }
         });
+    }
+
+    public boolean statusValidate(){
+        if (ref == ""){
+            errorMessage.setText("! service does not exist");
+            return false;
+        }
+
+        errorMessage.setText("");
+        return true;
     }
 }
