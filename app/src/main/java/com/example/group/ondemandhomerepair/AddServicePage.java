@@ -23,8 +23,6 @@ public class AddServicePage extends AppCompatActivity {
 
     private EditText name, rate;
     private Button addingServiceButt;
-    private RadioGroup radGroup;
-    private FirebaseAuth mAuth;
     private TextView errorMessage;
 
 
