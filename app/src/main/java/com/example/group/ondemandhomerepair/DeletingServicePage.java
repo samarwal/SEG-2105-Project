@@ -80,14 +80,10 @@ public class DeletingServicePage extends AppCompatActivity {
                                     if (String.valueOf(dsp.child("serviceName").getValue()).equals(baseName.getText().toString().trim())) {
                                         ref = dsp.getKey();
                                         serviceRef = FirebaseDatabase.getInstance().getReference().child("Services").child(ref);
-
+                                        serviceRef.removeValue();
+                                        errorMessage.setText("Removal Successful!");
+                                        startActivity(new Intent(DeletingServicePage.this, DeletingServicePage.class));
                                     }
-                                }
-                                if (statusValidate()) {
-                                    serviceRef.removeValue();
-                                    //errorMessage.setText("Removal Successful!");
-                                    ref = "";
-
                                 }
                             }
                             @Override

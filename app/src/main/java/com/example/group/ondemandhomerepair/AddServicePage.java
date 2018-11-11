@@ -53,7 +53,7 @@ public class AddServicePage extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
                                 Toast.makeText(AddServicePage.this, "Service addition successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(AddServicePage.this, WelcomePage.class));
+                                startActivity(new Intent(AddServicePage.this, AddServicePage.class));
                             } else {
                                 Toast.makeText(AddServicePage.this, "Registration f", Toast.LENGTH_SHORT).show();
                             }
