@@ -6,4 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".editServiceProviderTime">
 
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="551dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:text="                 Avalibility "
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/mondayTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Monday Times" />
+
+        <EditText
+            android:id="@+id/tuesdayTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Tuesday Times" />
+
+        <EditText
+            android:id="@+id/wednesdayTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Wednesday Times" />
+
+        <EditText
+            android:id="@+id/thursdayTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Thursday Times" />
+
+        <EditText
+            android:id="@+id/fridayTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Friday Times" />
+
+        <EditText
+            android:id="@+id/saturdayTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Saturday Times" />
+
+        <EditText
+            android:id="@+id/sundayTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Sunday Times" />
+
+        <Button
+            android:id="@+id/setTimes"
+            android:layout_width="match_parent"
+            android:layout_height="127dp"
+            android:text="Set Availibility " />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
