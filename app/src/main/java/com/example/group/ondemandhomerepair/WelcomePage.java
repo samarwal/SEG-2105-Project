@@ -64,7 +64,7 @@ public class WelcomePage extends AppCompatActivity {
                 }
             });
         }
-        if(userType.getText().equals("Service Provider")){                             // admin tools show when admin is logged in
+        if(userType.getText().equals("Provider")){                             // provider tools show when provider is logged in
 
             editInformationButton.setVisibility(View.VISIBLE);
             editInformationButton.setOnClickListener(new View.OnClickListener() {

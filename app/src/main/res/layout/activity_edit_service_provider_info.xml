@@ -6,4 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".EditServiceProviderInfo">
 
+    <Button
+        android:id="@+id/providerAddServiceButt"
+        android:layout_width="160dp"
+        android:layout_height="64dp"
+        android:text="Add Services to Account"
+        tools:layout_editor_absoluteX="112dp"
+        tools:layout_editor_absoluteY="347dp" />
+
+    <Button
+        android:id="@+id/changeTimesButt"
+        android:layout_width="160dp"
+        android:layout_height="64dp"
+        android:text="Change Availability"
+        tools:layout_editor_absoluteX="112dp"
+        tools:layout_editor_absoluteY="431dp" />
 </android.support.constraint.ConstraintLayout>

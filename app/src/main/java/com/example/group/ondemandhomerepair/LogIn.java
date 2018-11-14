@@ -93,7 +93,7 @@ public class LogIn extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Toast.makeText(LogIn.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LogIn.this, WelcomePage.class);
-                    intent.putExtra(EXTRA_TEXT1, userName);
+                    intent.putExtra(EXTRA_TEXT1, userName);         // send the username and type to welcome page
                     intent.putExtra(EXTRA_TEXT2, userType);
                     startActivity (intent);
 
