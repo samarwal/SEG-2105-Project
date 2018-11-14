@@ -21,6 +21,9 @@ public class WelcomePage extends AppCompatActivity {
         Button addServiceButton = (Button)findViewById(R.id.addServiceButt);    // find admin buttons and set to invisible
         addServiceButton.setVisibility(View.GONE);
 
+        Button editInformationButton = (Button)findViewById(R.id.editInfoButt);    // find admin buttons and set to invisible
+        editInformationButton.setVisibility(View.GONE);
+
         Button deleteServiceButton = (Button)findViewById(R.id.deleteServiceButt);
         deleteServiceButton.setVisibility(View.GONE);
 
@@ -61,6 +64,16 @@ public class WelcomePage extends AppCompatActivity {
                 }
             });
         }
+        if(userType.getText().equals("Service Provider")){                             // admin tools show when admin is logged in
+
+            editInformationButton.setVisibility(View.VISIBLE);
+            editInformationButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    openEditInformation();
+                }
+            });
+        }
 
     }
     public void openAddServices(){
@@ -73,6 +86,10 @@ public class WelcomePage extends AppCompatActivity {
     }
     public void openEditServices(){
         Intent intent = new Intent(this, EditServicePage.class);
+        startActivity(intent);
+    }
+    public void openEditInformation(){
+        Intent intent = new Intent(this, EditServiceProviderInfo.class);
         startActivity(intent);
     }
 }
