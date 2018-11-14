@@ -10,15 +10,29 @@
         android:id="@+id/providerAddServiceButt"
         android:layout_width="160dp"
         android:layout_height="64dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginRight="112dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="347dp"
         android:text="Add Services to Account"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="347dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/changeTimesButt"
         android:layout_width="160dp"
         android:layout_height="64dp"
+        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginRight="112dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="20dp"
         android:text="Change Availability"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="431dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/providerAddServiceButt" />
 </android.support.constraint.ConstraintLayout>
