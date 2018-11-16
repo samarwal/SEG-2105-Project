@@ -8,6 +8,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.content.Intent;
 
+import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT1;
+
 public class WelcomePage extends AppCompatActivity {
 
     @Override
@@ -30,13 +32,13 @@ public class WelcomePage extends AppCompatActivity {
         Button editServiceButton = (Button)findViewById(R.id.editServiceButt);
         editServiceButton.setVisibility(View.GONE);
 
-        Intent intent = getIntent();                                    // create intent by taking from previous intent
+        final Intent intent = getIntent();                                    // create intent by taking from previous intent
 
         TextView userName = (TextView)findViewById(R.id.userField);        // get text views
         TextView userType = (TextView)findViewById(R.id.typeField);
 
-        userName.setText(intent.getStringExtra(LogIn.EXTRA_TEXT1));           // get username from EXTRA_TEXT1 of intent
-        userType.setText(intent.getStringExtra(LogIn.EXTRA_TEXT2));           // get userType from EXTRA_TEXT@ of intent
+        userName.setText(intent.getStringExtra(EXTRA_TEXT1));           // get username from EXTRA_TEXT1 of intent
+        userType.setText(intent.getStringExtra(LogIn.EXTRA_TEXT2));           // get userType from EXTRA_TEXT2 of intent
 
         if(userType.getText().equals("Admin")){                             // admin tools show when admin is logged in
             accountsList.setVisibility(View.VISIBLE);
@@ -70,7 +72,7 @@ public class WelcomePage extends AppCompatActivity {
             editInformationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
-                    openEditInformation();
+                    openEditInformation(intent.getStringExtra(EXTRA_TEXT1));
                 }
             });
         }
@@ -88,8 +90,9 @@ public class WelcomePage extends AppCompatActivity {
         Intent intent = new Intent(this, EditServicePage.class);
         startActivity(intent);
     }
-    public void openEditInformation(){
+    public void openEditInformation(String providerUser){
         Intent intent = new Intent(this, EditServiceProviderInfo.class);
+        intent.putExtra(EXTRA_TEXT1, providerUser);            // send username of provider to page where they can edit info
         startActivity(intent);
     }
 }
