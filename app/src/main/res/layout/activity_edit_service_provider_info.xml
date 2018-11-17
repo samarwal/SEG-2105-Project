@@ -14,9 +14,10 @@
         android:layout_marginLeft="112dp"
         android:layout_marginRight="112dp"
         android:layout_marginStart="112dp"
-        android:layout_marginTop="347dp"
+        android:layout_marginTop="388dp"
         android:text="Add Services to Account"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,15 +25,190 @@
         android:id="@+id/changeTimesButt"
         android:layout_width="160dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="39dp"
         android:layout_marginEnd="112dp"
         android:layout_marginLeft="112dp"
         android:layout_marginRight="112dp"
         android:layout_marginStart="112dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:text="Change Availability"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/providerAddServiceButt" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="140dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginStart="16dp"
+        android:text="Company Name:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toStartOf="@+id/providerPhoneText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginStart="16dp"
+        android:text="Phone Number:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintEnd_toStartOf="@+id/providerPhoneText"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Address:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="78dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Description:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="33dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:text="Are you licensed?:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/providerDescriptText"
+        app:layout_constraintVertical_bias="0.937" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="160dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginRight="112dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="17dp"
+        android:text="Set Information"
+        app:layout_constraintBottom_toTopOf="@+id/providerAddServiceButt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkLicenserb" />
+
+    <EditText
+        android:id="@+id/providerNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="3dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/providerPhoneText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView7" />
+
+    <EditText
+        android:id="@+id/providerPhoneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginStart="12dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/providerNameText" />
+
+    <EditText
+        android:id="@+id/providerAddressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginStart="64dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/providerPhoneText" />
+
+    <EditText
+        android:id="@+id/providerDescriptText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:layout_marginLeft="41dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginStart="41dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/providerAddressText" />
+
+    <RadioGroup
+        android:id="@+id/checkLicenserb"
+        android:layout_width="65dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginLeft="47dp"
+        android:layout_marginRight="112dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="43dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/providerDescriptText">
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Yes" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="No" />
+    </RadioGroup>
+
 </android.support.constraint.ConstraintLayout>
