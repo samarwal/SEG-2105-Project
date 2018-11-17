@@ -9,14 +9,14 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="313dp"
-        android:layout_height="39dp"
+        android:layout_height="77dp"
         android:layout_marginBottom="42dp"
         android:layout_marginEnd="35dp"
         android:layout_marginLeft="36dp"
         android:layout_marginRight="35dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="65dp"
-        android:text="Add services to Your Account"
+        android:text="Add or Delete services to     Your Account"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,14 +42,16 @@
         android:id="@+id/providerServicesSpinner"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
+        android:layout_marginBottom="45dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/providerServiceText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
         android:id="@+id/textView6"
@@ -83,13 +85,24 @@
         android:id="@+id/providerAddServiceButt"
         android:layout_width="126dp"
         android:layout_height="66dp"
-        android:layout_marginBottom="95dp"
-        android:layout_marginEnd="129dp"
-        android:layout_marginLeft="129dp"
-        android:layout_marginRight="129dp"
-        android:layout_marginStart="129dp"
+        android:layout_marginBottom="96dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="61dp"
+        android:layout_marginStart="36dp"
         android:text="Add Service"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/provderServiceDeleteButt"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/provderServiceDeleteButt"
+        android:layout_width="126dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="96dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:text="Delete Service"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>
