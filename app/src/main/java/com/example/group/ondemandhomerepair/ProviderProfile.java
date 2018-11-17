@@ -6,7 +6,6 @@ public class ProviderProfile {
     public int phonenumber;
 
     public ProviderProfile(){
-
     }
 
     public ProviderProfile(String address, int phonenumber, String company, String profiledescription, String providerlicense) {
