@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT1;
@@ -25,11 +27,14 @@ public class EditServiceProviderInfo extends AppCompatActivity {
     private TextView errorMessage;
     private RadioGroup radGroup;
     private RadioButton radButton;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_service_provider_info);
+
+        mAuth = FirebaseAuth.getInstance();
 
         final Intent intent = getIntent();
         final String providerUser = intent.getStringExtra(EXTRA_TEXT1);  // retrieve provider name from welcome page intent
@@ -57,8 +62,9 @@ public class EditServiceProviderInfo extends AppCompatActivity {
                             desc
                     );
 
-                    FirebaseDatabase.getInstance().getReference("ProviderProfileInfo")
-                            .push().setValue(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    FirebaseDatabase.getInstance().getReference("ProviderProfileInfo").child(user.getUid())
+                            .setValue(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {

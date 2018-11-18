@@ -15,13 +15,13 @@ public class ProviderProfile {
         this.company = company;
     }
 
-    public int getphonenumber(){
+    /*public int getphonenumber(){
         return this.phonenumber;
     }
 
-    /*public String getAddress(){
+    public String getAddress(){
         return this.address;
-    }*/
+    }
 
     public String getProfiledescription(){
         return this.profiledescription;
@@ -50,5 +50,5 @@ public class ProviderProfile {
     public String toString(){
         return "PhoneNumber: "+this.phonenumber+" | Address: "+this.address+
                 " | Description: "+this.profiledescription+ "| Company: "+this.company;
-    }
+    }*/
 }
