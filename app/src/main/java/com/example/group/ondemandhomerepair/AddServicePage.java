@@ -62,7 +62,6 @@ public class AddServicePage extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public boolean statusValidate() {
