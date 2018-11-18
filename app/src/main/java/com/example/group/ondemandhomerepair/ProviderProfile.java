@@ -8,11 +8,10 @@ public class ProviderProfile {
     public ProviderProfile(){
     }
 
-    public ProviderProfile(String address, int phonenumber, String company, String profiledescription, String providerlicense) {
-        this.phonenumber = phonenumber;
+    public ProviderProfile(String address, int phonenumber, String company, String profiledescription) {
         this.address = address;
+        this.phonenumber = phonenumber;
         this.profiledescription = profiledescription;
-        this.providerlicense = providerlicense;
         this.company = company;
     }
 
@@ -20,15 +19,14 @@ public class ProviderProfile {
         return this.phonenumber;
     }
 
-    public String getAdress(){
+    /*public String getAddress(){
         return this.address;
-    }
+    }*/
+
     public String getProfiledescription(){
         return this.profiledescription;
     }
-    public String getProviderlicense(){
-        return this.providerlicense;
-    }
+
     public String getCompany(){
         return this.company;
     }
@@ -45,16 +43,12 @@ public class ProviderProfile {
         this.profiledescription = profiledescription;
     }
 
-    public void setProviderlicense(String providerlicense){
-        this.providerlicense = providerlicense;
-    }
-
     public void setCompany(String company){
         this.company = company;
     }
 
     public String toString(){
-        return "PhoneNumber: "+this.phonenumber+" | Address: "+this.address+ " | Description: "+this.profiledescription+
-        " | License: "+this.providerlicense+" | Company: "+this.company;
+        return "PhoneNumber: "+this.phonenumber+" | Address: "+this.address+
+                " | Description: "+this.profiledescription+ "| Company: "+this.company;
     }
 }

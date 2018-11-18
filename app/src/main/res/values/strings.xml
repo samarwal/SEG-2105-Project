@@ -17,6 +17,7 @@
     <string name="title_activity_edit_service_provider_time">editServiceProviderTime</string>
     <string name="title_activity_edit_service_provider_services">editServiceProviderServices
     </string>
+    <string name="YES">string</string>
 
 
 </resources>

@@ -103,13 +103,13 @@
         android:layout_marginTop="60dp"
         android:text="Are you licensed?:"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/SetInfoButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/providerDescriptText"
         app:layout_constraintVertical_bias="0.937" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/SetInfoButton"
         android:layout_width="160dp"
         android:layout_height="51dp"
         android:layout_marginBottom="18dp"
@@ -182,7 +182,7 @@
 
     <RadioGroup
         android:id="@+id/checkLicenserb"
-        android:layout_width="65dp"
+        android:layout_width="82dp"
         android:layout_height="58dp"
         android:layout_marginBottom="17dp"
         android:layout_marginEnd="112dp"
@@ -190,25 +190,26 @@
         android:layout_marginRight="112dp"
         android:layout_marginStart="47dp"
         android:layout_marginTop="43dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/SetInfoButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/providerDescriptText">
 
         <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
+            android:id="@+id/radioButton3"
+            android:layout_width="107dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Yes" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="wrap_content"
+            android:id="@+id/radioButton2"
+            android:layout_width="94dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="No" />
+
     </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>

@@ -71,28 +71,27 @@
         android:id="@+id/addServiceButt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="118dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginRight="43dp"
         android:layout_marginBottom="95dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="118dp"
         android:text="add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/deletingServiceButt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountList" />
+        app:layout_constraintTop_toBottomOf="@+id/accountList"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/deleteServiceButt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
         android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp"
         android:layout_marginTop="118dp"
-        android:layout_marginBottom="95dp"
         android:text="delete"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addServiceButt"
         app:layout_constraintTop_toBottomOf="@+id/accountList" />
 
@@ -100,17 +99,18 @@
         android:id="@+id/editServiceButt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
-        android:layout_marginLeft="43dp"
-        android:layout_marginTop="118dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginRight="18dp"
         android:layout_marginBottom="95dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="118dp"
         android:text="edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/deletingServiceButt"
-        app:layout_constraintTop_toBottomOf="@+id/accountList" />
+        app:layout_constraintTop_toBottomOf="@+id/accountList"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/editInfoButt"
@@ -119,7 +119,7 @@
         android:text="Edit Information"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addServiceButt" />
+        app:layout_constraintTop_toBottomOf="@+id/addServiceButt"
+        app:layout_constraintVertical_bias="0.212" />
 </android.support.constraint.ConstraintLayout>
