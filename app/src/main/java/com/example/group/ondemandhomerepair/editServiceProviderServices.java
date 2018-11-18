@@ -85,8 +85,8 @@ public class editServiceProviderServices extends Activity {
                 if(Validate(providerSerivceinput.getText().toString().trim())){ // check if the text is empty
                     for(int i = 0; i < services.size(); i++){
                         if(services.get(i).equals(providerSerivceinput.getText().toString().trim())){ // check if the service provider entered exists
-                            FirebaseDatabase.getInstance().getReference("https://seg-2105-project.firebaseio.com/Users/" + providerID + "/myServices")
-                                    .push().setValue(providerSerivceinput.getText().toString().trim());                     // add the service to firebase under providers list of services
+                            FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myServices")
+                                    .push().setValue((providerSerivceinput.getText().toString().trim()));             // add the service to firebase under providers list of services
                         }
                     }
                 }
@@ -97,14 +97,15 @@ public class editServiceProviderServices extends Activity {
             @Override
             public void onClick(View v) {
                 if(Validate(providerSerivceinput.getText().toString().trim())){ // check if the text is empty
-                    FirebaseDatabase.getInstance().getReference("https://seg-2105-project.firebaseio.com/Users/" + providerID + "/myServices").addListenerForSingleValueEvent(    // get the info of the provider
+                    FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myServices").addListenerForSingleValueEvent(    // get the info of the provider
                             new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                                         if(providerSerivceinput.getText().toString().trim().equals(dsp.getValue().toString())){
-                                            DatabaseReference selectedService = FirebaseDatabase.getInstance().getReference(dsp.getKey()).child(dsp.getKey());
-                                            selectedService.removeValue();
+                                            FirebaseDatabase.getInstance().getReference("Users").child(providerID)
+                                                                                .child("myServices").child(dsp.getKey()).removeValue();
+
                                         }
                                     }
                                 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,22 +35,24 @@ public class EditServiceProviderInfo extends AppCompatActivity {
         final Intent intent = getIntent();
         final String providerUser = intent.getStringExtra(EXTRA_TEXT1);  // retrieve provider name from welcome page intent
 
-        Address = findViewById(R.id.providerAddressText);
-        phoneNumber = findViewById(R.id.providerPhoneText);
-        Company = findViewById(R.id.providerNameText);
-        profileDescription = findViewById(R.id.providerDescriptText);
-        radGroup = findViewById(R.id.checkLicenserb);
-        addingProfileButt = findViewById(R.id.button2);
+        Address = (EditText)findViewById(R.id.providerAddressText);
+        phoneNumber = (EditText)findViewById(R.id.providerPhoneText);
+        Company = (EditText)findViewById(R.id.providerNameText);
+        profileDescription = (EditText)findViewById(R.id.providerDescriptText);
+        radGroup = (RadioGroup) findViewById(R.id.checkLicenserb);
+        addingProfileButt = (Button)findViewById(R.id.button2);
 
         addingProfileButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                final String Add = Address.getText().toString().trim();
+                final String phone = phoneNumber.getText().toString().trim();
+                final String comp = Company.getText().toString().trim();
+                final String desc = profileDescription.getText().toString().trim();
+                final String license = radButton.getText().toString();
+
                 if (statusValidate()) {
-                    final String Add = Address.getText().toString().trim();
-                    final String phone = phoneNumber.getText().toString().trim();
-                    final String comp = Company.getText().toString().trim();
-                    final String desc = profileDescription.getText().toString().trim();
-                    final String license = radButton.getText().toString();
 
                     ProviderProfile profile = new ProviderProfile(
                             Add,
@@ -71,6 +74,7 @@ public class EditServiceProviderInfo extends AppCompatActivity {
                             }
                         }
                     });
+
                 }
             }
         });
