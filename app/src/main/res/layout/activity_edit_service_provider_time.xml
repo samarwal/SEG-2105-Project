@@ -30,56 +30,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Monday Times" />
+            android:hint="Monday Times"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/tuesdayTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Tuesday Times" />
+            android:hint="Tuesday Times"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/wednesdayTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Wednesday Times" />
+            android:hint="Wednesday Times"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/thursdayTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Thursday Times" />
+            android:hint="Thursday Times"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/fridayTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Friday Times" />
+            android:hint="Friday Times"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/saturdayTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Saturday Times" />
+            android:hint="Saturday Times"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/sundayTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Sunday Times" />
+            android:hint="Sunday Times"
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/setTimesButt"
