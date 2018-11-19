@@ -29,7 +29,7 @@ public class editServiceProviderTime extends Activity {
     private EditText monday,tuesday,wednesday,thursday,friday,saturday,sunday;
     private Button SetTimesButton;
     private TextView errorMessage;
-    private String providerID;
+    String providerID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +45,21 @@ public class editServiceProviderTime extends Activity {
         saturday = findViewById(R.id.saturdayTime);
         sunday = findViewById(R.id.sundayTime);
         SetTimesButton = findViewById(R.id.setTimesButt);
+
         Intent intent = getIntent();
         final String providerName = intent.getStringExtra(EXTRA_TEXT1);
 
 
 
 
+
         //TODO This does not work for some reason. the code appears the exact same as in editServiceProviderServices.java but causes to crash if its not uncommented. other than this it should work
-        /*
-        FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(    // get the ID of the provider in firebase
+        /*FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(    // get the ID of the provider in firebase
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                            if(providerName.equals(String.valueOf(dsp.child("username").getValue().toString())) && dsp.child("roleType").getValue().toString().equals("Service Provider")){  //find the provider in firebase and get ID
+                            if(providerName.equals(String.valueOf(dsp.child("username").getValue().toString())) && dsp.child("roleType").getValue().toString().equals("Service Provider")){  //find the provider in firebase and get ID  //TODO this line is what makes it crash
                                 providerID = dsp.getKey();
                             }
                         }
