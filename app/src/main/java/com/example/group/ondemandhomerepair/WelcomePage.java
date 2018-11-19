@@ -63,15 +63,32 @@ public class WelcomePage extends AppCompatActivity {
         userName.setText(intent.getStringExtra(EXTRA_TEXT1));           // get username from EXTRA_TEXT1 of intent
         userType.setText(intent.getStringExtra(LogIn.EXTRA_TEXT2));           // get userType from EXTRA_TEXT2 of intent
 
-        show = (ListView) findViewById(R.id.ListView);
+        show = (ListView)findViewById(R.id.providersServices);
+        show.setVisibility(View.GONE);
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        uid = user.getUid();
+        //uid = user.getUid();
         itemlist = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent( // get the ID of the provider in firebase
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                            if(intent.getStringExtra(EXTRA_TEXT1).equals(String.valueOf(dsp.child("username").getValue().toString())) && dsp.child("roleType").getValue().toString().equals("Service Provider")){  //find the provider in firebase and get ID
+                                uid = dsp.getKey();
+                            }
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                }
+        );
 
         if(userType.getText().equals("Admin")){                             // admin tools show when admin is logged in
             accountsList.setVisibility(View.VISIBLE);
@@ -104,6 +121,7 @@ public class WelcomePage extends AppCompatActivity {
         if(userType.getText().equals("Provider")){                             // provider tools show when provider is logged in
 
             editInformationButton.setVisibility(View.VISIBLE);
+            show.setVisibility(View.VISIBLE);
             editInformationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
@@ -115,10 +133,10 @@ public class WelcomePage extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     itemlist.clear();
-                    String user_address = dataSnapshot.child("ProviderProfileInfo").child(uid).child("address").getValue(String.class);
-                    String user_company = dataSnapshot.child("ProviderProfileInfo").child(uid).child("company").getValue(String.class);
-                    String user_phonenumber = dataSnapshot.child("ProviderProfileInfo").child(uid).child("phonenumber").getValue(String.class);
-                    String user_desc = dataSnapshot.child("ProviderProfileInfo").child(uid).child("profiledescription").getValue(String.class);
+                    String user_address = String.valueOf(dataSnapshot.child("ProviderProfileInfo").child(uid).child("address").getValue());
+                    String user_company = String.valueOf(dataSnapshot.child("ProviderProfileInfo").child(uid).child("company").getValue());
+                    String user_phonenumber = String.valueOf(dataSnapshot.child("ProviderProfileInfo").child(uid).child("phonenumber").getValue());
+                    String user_desc = String.valueOf(dataSnapshot.child("ProviderProfileInfo").child(uid).child("profiledescription").getValue());
 
                     itemlist.add(user_address);
                     itemlist.add(user_company);
@@ -126,6 +144,7 @@ public class WelcomePage extends AppCompatActivity {
                     itemlist.add(user_desc);
 
                     adapter = new ArrayAdapter<>(WelcomePage.this, android.R.layout.simple_list_item_1, itemlist);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     show.setAdapter(adapter);
                 }
 
