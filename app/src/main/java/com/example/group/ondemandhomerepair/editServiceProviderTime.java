@@ -54,7 +54,7 @@ public class editServiceProviderTime extends Activity {
 
 
         //TODO This does not work for some reason. the code appears the exact same as in editServiceProviderServices.java but causes to crash if its not uncommented. other than this it should work
-        /*FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(    // get the ID of the provider in firebase
+        FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(    // get the ID of the provider in firebase
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -70,7 +70,7 @@ public class editServiceProviderTime extends Activity {
 
                     }
                 }
-        );*/
+        );
 
 
         SetTimesButton.setOnClickListener(new View.OnClickListener() {

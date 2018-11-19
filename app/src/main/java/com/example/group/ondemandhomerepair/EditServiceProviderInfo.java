@@ -96,6 +96,7 @@ public class EditServiceProviderInfo extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(EditServiceProviderInfo.this, editServiceProviderTime.class);
+                intent.putExtra(EXTRA_TEXT1, providerUser);
                 startActivity(intent);
             }
         });
