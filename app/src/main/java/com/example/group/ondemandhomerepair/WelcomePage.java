@@ -3,14 +3,37 @@ package com.example.group.ondemandhomerepair;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.content.Intent;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT1;
 
 public class WelcomePage extends AppCompatActivity {
+
+    ListView show;
+    ArrayAdapter<String> adapter;
+    DatabaseReference databaseReference;
+    FirebaseUser user;
+    List<String> itemlist;
+    String uid;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +63,16 @@ public class WelcomePage extends AppCompatActivity {
         userName.setText(intent.getStringExtra(EXTRA_TEXT1));           // get username from EXTRA_TEXT1 of intent
         userType.setText(intent.getStringExtra(LogIn.EXTRA_TEXT2));           // get userType from EXTRA_TEXT2 of intent
 
+        show = (ListView) findViewById(R.id.ListView);
+
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
+        itemlist = new ArrayList<>();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
+
         if(userType.getText().equals("Admin")){                             // admin tools show when admin is logged in
             accountsList.setVisibility(View.VISIBLE);
             addServiceButton.setVisibility(View.VISIBLE);
@@ -66,6 +99,8 @@ public class WelcomePage extends AppCompatActivity {
                 }
             });
         }
+
+
         if(userType.getText().equals("Provider")){                             // provider tools show when provider is logged in
 
             editInformationButton.setVisibility(View.VISIBLE);
@@ -73,6 +108,30 @@ public class WelcomePage extends AppCompatActivity {
                 @Override
                 public void onClick(View v){
                     openEditInformation(intent.getStringExtra(EXTRA_TEXT1));
+                }
+            });
+
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    itemlist.clear();
+                    String user_address = dataSnapshot.child("ProviderProfileInfo").child(uid).child("address").getValue(String.class);
+                    String user_company = dataSnapshot.child("ProviderProfileInfo").child(uid).child("company").getValue(String.class);
+                    String user_phonenumber = dataSnapshot.child("ProviderProfileInfo").child(uid).child("phonenumber").getValue(String.class);
+                    String user_desc = dataSnapshot.child("ProviderProfileInfo").child(uid).child("profiledescription").getValue(String.class);
+
+                    itemlist.add(user_address);
+                    itemlist.add(user_company);
+                    itemlist.add(user_phonenumber);
+                    itemlist.add(user_desc);
+
+                    adapter = new ArrayAdapter<>(WelcomePage.this, android.R.layout.simple_list_item_1, itemlist);
+                    show.setAdapter(adapter);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
                 }
             });
         }
