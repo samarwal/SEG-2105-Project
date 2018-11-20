@@ -22,8 +22,8 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="47dp"
-            android:text="                 Avalibility "
-            android:textSize="30sp" />
+            android:text="Availability (Specify in 24 hour Clock)"
+            android:textSize="22sp" />
 
         <EditText
             android:id="@+id/mondayTime"
