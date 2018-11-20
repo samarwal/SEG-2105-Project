@@ -29,6 +29,7 @@ public class editServiceProviderTime extends Activity {
     private EditText monday,tuesday,wednesday,thursday,friday,saturday,sunday;
     private Button SetTimesButton;
     String providerID;
+    DayList daylist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +50,6 @@ public class editServiceProviderTime extends Activity {
         final String providerName = intent.getStringExtra(EXTRA_TEXT1);
 
 
-
-
-
         //TODO This does not work for some reason. the code appears the exact same as in editServiceProviderServices.java but causes to crash if its not uncommented. other than this it should work
         FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(    // get the ID of the provider in firebase
                 new ValueEventListener() {
@@ -61,6 +59,17 @@ public class editServiceProviderTime extends Activity {
                             if(providerName.equals(String.valueOf(dsp.child("username").getValue().toString())) && dsp.child("roleType").getValue().toString().equals("Service Provider")){  //find the provider in firebase and get ID  //TODO this line is what makes it crash
                                 providerID = dsp.getKey();
                             }
+
+                        }
+                        for (DataSnapshot dsp : dataSnapshot.child(providerID).child("myTimes").getChildren()) {
+                            daylist = new DayList(String.valueOf(dsp.child("mon").getValue()), String.valueOf(dsp.child("tues").getValue()), String.valueOf(dsp.child("wed").getValue()), String.valueOf(dsp.child("thurs").getValue()), String.valueOf(dsp.child("fri").getValue()), String.valueOf(dsp.child("sat").getValue()), String.valueOf(dsp.child("sun").getValue()));
+                            monday.setText(daylist.getMon());
+                            tuesday.setText(daylist.getTues());
+                            wednesday.setText(daylist.getWed());
+                            thursday.setText(daylist.getThurs());
+                            friday.setText(daylist.getFri());
+                            saturday.setText(daylist.getSat());
+                            sunday.setText(daylist.getSun());
                         }
                     }
 
@@ -70,6 +79,31 @@ public class editServiceProviderTime extends Activity {
                     }
                 }
         );
+/*
+        FirebaseDatabase.getInstance().getReference().child("Users").child(providerID).child("myTimes").addListenerForSingleValueEvent(
+                new ValueEventListener(){
+                    @Override
+
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                            daylist = new DayList(String.valueOf(dsp.child("mon").getValue()), String.valueOf(dsp.child("tues").getValue()), String.valueOf(dsp.child("wed").getValue()), String.valueOf(dsp.child("thurs").getValue()), String.valueOf(dsp.child("fri").getValue()), String.valueOf(dsp.child("sat").getValue()), String.valueOf(dsp.child("sun").getValue()));
+                            monday.setText(daylist.getMon());
+                            tuesday.setText(daylist.getTues());
+                            wednesday.setText(daylist.getWed());
+                            thursday.setText(daylist.getThurs());
+                            friday.setText(daylist.getFri());
+                            saturday.setText(daylist.getSat());
+                            sunday.setText(daylist.getSun());
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+*/
+
+
 
 
         SetTimesButton.setOnClickListener(new View.OnClickListener() {
@@ -82,8 +116,14 @@ public class editServiceProviderTime extends Activity {
                 final String Friday = friday.getText().toString().trim();
                 final String Saturday = saturday.getText().toString().trim();
                 final String Sunday = sunday.getText().toString().trim();
-                if(statusValidate()){ // check if the text is empty
+                if (statusValidate()) { // check if the text is empty
+                    daylist = new DayList(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
+                    FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myTimes").removeValue();
+                    FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myTimes").push().setValue(daylist);
 
+
+
+                    /*
                     FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myTimes").push().setValue(Monday);             // add the service to firebase under providers list of services
                     FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myTimes").push().setValue(Tuesday);
                     FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myTimes").push().setValue(Wednesday);
@@ -91,10 +131,12 @@ public class editServiceProviderTime extends Activity {
                     FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myTimes").push().setValue(Friday);
                     FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myTimes").push().setValue(Saturday);
                     FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myTimes").push().setValue(Sunday);
-
+                    */
                 }
             }
         });
+    }
+
         /*
         providerDeleteServiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +166,6 @@ public class editServiceProviderTime extends Activity {
         });*/
 
 
-    }
     /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
