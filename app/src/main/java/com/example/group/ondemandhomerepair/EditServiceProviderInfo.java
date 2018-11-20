@@ -24,7 +24,6 @@ public class EditServiceProviderInfo extends AppCompatActivity {
 
     private EditText Address, phoneNumber, Company, profileDescription, Licensed;
     private Button addingProfileButt;
-    private TextView errorMessage;
     private RadioGroup radGroup;
     private RadioButton radButton;
     private FirebaseAuth mAuth;
@@ -107,19 +106,19 @@ public class EditServiceProviderInfo extends AppCompatActivity {
     }
 
     public boolean statusValidate() {
+        if (Company.getText().toString().trim().equals(""))  {
+            Toast.makeText(EditServiceProviderInfo.this, "Company Name is Empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (phoneNumber.getText().toString().trim().equals("")){
+            Toast.makeText(EditServiceProviderInfo.this, "Phone Number is Empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (Address.getText().toString().equals("")) {
+            Toast.makeText(EditServiceProviderInfo.this, "Address is Empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
-        if (Address.getText().toString().equals("") || Address.getText().toString() == null) {
-            errorMessage.setText("! Address is empty");
-            return false;
-        }
-        if (phoneNumber.getText().toString().trim().equals("") || phoneNumber.getText().toString().trim() == null) {
-            errorMessage.setText("! Phone Number is empty");
-            return false;
-        }
-        if (Company.getText().toString().trim().equals("") || Company.getText().toString().trim() == null) {
-            errorMessage.setText("! Company is empty");
-            return false;
-        }
         return true;
     }
 }

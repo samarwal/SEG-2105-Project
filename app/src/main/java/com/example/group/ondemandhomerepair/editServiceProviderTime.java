@@ -28,7 +28,6 @@ public class editServiceProviderTime extends Activity {
 
     private EditText monday,tuesday,wednesday,thursday,friday,saturday,sunday;
     private Button SetTimesButton;
-    private TextView errorMessage;
     String providerID;
 
     @Override
@@ -181,31 +180,31 @@ public class editServiceProviderTime extends Activity {
     public boolean statusValidate() {
 
         if (monday.getText().toString().equals("")) {
-            errorMessage.setText("! monday is empty");
+            Toast.makeText(editServiceProviderTime.this, "Monday is Empty", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (tuesday.getText().toString().equals("")) {
-            errorMessage.setText("! tuesday is empty");
+            Toast.makeText(editServiceProviderTime.this, "Tuesday is Empty", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (wednesday.getText().toString().equals("")) {
-            errorMessage.setText("! wednesday is empty");
+            Toast.makeText(editServiceProviderTime.this, "Wednesday is Empty", Toast.LENGTH_SHORT).show();;
             return false;
         }
         if (thursday.getText().toString().equals("")) {
-            errorMessage.setText("! thursday is empty");
+            Toast.makeText(editServiceProviderTime.this, "Thursday is Empty", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (friday.getText().toString().equals("")) {
-            errorMessage.setText("! friday is empty");
+            Toast.makeText(editServiceProviderTime.this, "Friday is Empty", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (saturday.getText().toString().equals("")) {
-            errorMessage.setText("! saturday is empty");
+            Toast.makeText(editServiceProviderTime.this, "Saturday is Empty", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (sunday.getText().toString().equals("")) {
-            errorMessage.setText("! sunday is empty");
+            Toast.makeText(editServiceProviderTime.this, "Sunday is Empty", Toast.LENGTH_SHORT).show();
             return false;
         }
 
