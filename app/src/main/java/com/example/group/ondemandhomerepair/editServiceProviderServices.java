@@ -55,7 +55,7 @@ public class editServiceProviderServices extends Activity {
                 }
         );
 
-        final ArrayList<String> services = new ArrayList<String>();             // create a list of services and fill the spinner with list contents
+        final ArrayList<Service> services = new ArrayList<Service>();             // create a list of services and fill the spinner with list contents
 
         FirebaseDatabase.getInstance().getReference().child("Services").addListenerForSingleValueEvent( // fill the list with services
                 new ValueEventListener() {
@@ -65,7 +65,8 @@ public class editServiceProviderServices extends Activity {
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                             Service temp = new Service("a",0);
                             temp.setServiceName(String.valueOf(dsp.child("serviceName").getValue()));
-                            services.add(temp.getServiceName());
+                            temp.setHourlyRate(Integer.valueOf(dsp.child("hourlyRate").getValue(int.class)));
+                            services.add(temp);
                         }
                     }
                     @Override
@@ -74,7 +75,7 @@ public class editServiceProviderServices extends Activity {
                     }
                 });
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(                // fill the spinner in the page with contents
+        ArrayAdapter<Service> adapter = new ArrayAdapter<Service>(                // fill the spinner in the page with contents
                 this, android.R.layout.simple_spinner_item, services);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         serviceDropDown.setAdapter(adapter);                                // set spinner adapter
@@ -84,9 +85,10 @@ public class editServiceProviderServices extends Activity {
             public void onClick(View v) {
                 if(Validate(providerSerivceinput.getText().toString().trim())){ // check if the text is empty
                     for(int i = 0; i < services.size(); i++){
-                        if(services.get(i).equals(providerSerivceinput.getText().toString().trim())){ // check if the service provider entered exists
+                        if(services.get(i).getServiceName().equals(providerSerivceinput.getText().toString().trim())){ // check if the service provider entered exists
                             FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myServices")
-                                    .push().setValue((providerSerivceinput.getText().toString().trim()));             // add the service to firebase under providers list of services
+                                    .push().setValue(services.get(i));             // add the service to firebase under providers list of services
+                        return;
                         }
                     }
                 }
@@ -102,7 +104,7 @@ public class editServiceProviderServices extends Activity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                                        if(providerSerivceinput.getText().toString().trim().equals(dsp.getValue().toString())){
+                                        if(providerSerivceinput.getText().toString().trim().equals(dsp.child("serviceName").getValue().toString())){
                                             FirebaseDatabase.getInstance().getReference("Users").child(providerID)
                                                                                 .child("myServices").child(dsp.getKey()).removeValue();
 
