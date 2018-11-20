@@ -8,11 +8,12 @@ public class ProviderProfile {
     public ProviderProfile(){
     }
 
-    public ProviderProfile(String address, int phonenumber, String company, String profiledescription) {
+    public ProviderProfile(String address, int phonenumber, String company, String profiledescription, String license) {
         this.address = address;
         this.phonenumber = phonenumber;
         this.profiledescription = profiledescription;
         this.company = company;
+        this.providerlicense =  license;
     }
 
     /*public int getphonenumber(){

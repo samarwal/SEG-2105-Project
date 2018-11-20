@@ -85,18 +85,15 @@
         android:id="@+id/deleteServiceButt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="95dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginLeft="43dp"
-        android:layout_marginRight="37dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginBottom="29dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginLeft="148dp"
+        android:layout_marginRight="148dp"
+        android:layout_marginStart="148dp"
         android:text="delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editServiceButt"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/addServiceButt"
-        app:layout_constraintTop_toBottomOf="@+id/providersServices" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/editServiceButt"
@@ -116,24 +113,23 @@
 
     <Button
         android:id="@+id/editInfoButt"
-        android:layout_width="128dp"
-        android:layout_height="77dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="121dp"
+        android:layout_height="84dp"
+        android:layout_marginBottom="225dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
         android:text="Edit Information"
-        app:layout_constraintBottom_toTopOf="@+id/editServiceButt"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/providersServices"
-        app:layout_constraintTop_toBottomOf="@+id/accountList" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/providersServices" />
 
     <ListView
         android:id="@+id/providersServices"
         android:layout_width="220dp"
-        android:layout_height="93dp"
+        android:layout_height="99dp"
         android:layout_marginEnd="156dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="156dp"

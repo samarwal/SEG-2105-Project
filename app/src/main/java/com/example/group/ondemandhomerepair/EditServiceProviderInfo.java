@@ -22,7 +22,7 @@ import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT1;
 
 public class EditServiceProviderInfo extends AppCompatActivity {
 
-    private EditText Address, phoneNumber, Company, profileDescription;
+    private EditText Address, phoneNumber, Company, profileDescription, Licensed;
     private Button addingProfileButt;
     private TextView errorMessage;
     private RadioGroup radGroup;
@@ -54,12 +54,16 @@ public class EditServiceProviderInfo extends AppCompatActivity {
                     final String phone = phoneNumber.getText().toString().trim();
                     final String comp = Company.getText().toString().trim();
                     final String desc = profileDescription.getText().toString().trim();
+                    final int selected = radGroup.getCheckedRadioButtonId();
+                    RadioButton selectedButt = (RadioButton)findViewById(selected);
+                    final String lic = selectedButt.getText().toString();
 
                     ProviderProfile profile = new ProviderProfile(
                             Add,
                             Integer.parseInt(phone),
                             comp,
-                            desc
+                            desc,
+                            lic
                     );
 
                     FirebaseUser user = mAuth.getCurrentUser();

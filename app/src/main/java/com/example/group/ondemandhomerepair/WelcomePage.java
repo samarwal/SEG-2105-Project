@@ -137,11 +137,13 @@ public class WelcomePage extends AppCompatActivity {
                     String user_company = String.valueOf(dataSnapshot.child("ProviderProfileInfo").child(uid).child("company").getValue());
                     String user_phonenumber = String.valueOf(dataSnapshot.child("ProviderProfileInfo").child(uid).child("phonenumber").getValue());
                     String user_desc = String.valueOf(dataSnapshot.child("ProviderProfileInfo").child(uid).child("profiledescription").getValue());
+                    String user_license = String.valueOf(dataSnapshot.child("ProviderProfileInfo").child(uid).child("providerlicense").getValue());
 
-                    itemlist.add(user_address);
-                    itemlist.add(user_company);
-                    itemlist.add(user_phonenumber);
+                    itemlist.add("Address: " + user_address);
+                    itemlist.add("Name: " + user_company);
+                    itemlist.add("Phone Number: " + user_phonenumber);
                     itemlist.add(user_desc);
+                    itemlist.add("Licensed" + user_license);
 
                     adapter = new ArrayAdapter<>(WelcomePage.this, android.R.layout.simple_list_item_1, itemlist);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
