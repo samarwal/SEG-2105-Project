@@ -55,6 +55,9 @@ public class WelcomePage extends AppCompatActivity {
         Button editServiceButton = (Button)findViewById(R.id.editServiceButt);
         editServiceButton.setVisibility(View.GONE);
 
+        Button advancedInfoButton = (Button)findViewById(R.id.providerAdvancedButt);
+        advancedInfoButton.setVisibility(View.GONE);
+
         final Intent intent = getIntent();                                    // create intent by taking from previous intent
 
         TextView userName = (TextView)findViewById(R.id.userField);        // get text views
@@ -68,7 +71,6 @@ public class WelcomePage extends AppCompatActivity {
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        //uid = user.getUid();
         itemlist = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -121,11 +123,19 @@ public class WelcomePage extends AppCompatActivity {
         if(userType.getText().equals("Provider")){                             // provider tools show when provider is logged in
 
             editInformationButton.setVisibility(View.VISIBLE);
+            advancedInfoButton.setVisibility(View.VISIBLE);
             show.setVisibility(View.VISIBLE);
+
             editInformationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
                     openEditInformation(intent.getStringExtra(EXTRA_TEXT1));
+                }
+            });
+            advancedInfoButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openAdvancedInfo(intent.getStringExtra(EXTRA_TEXT1));
                 }
             });
 
@@ -143,7 +153,7 @@ public class WelcomePage extends AppCompatActivity {
                     itemlist.add("Name: " + user_company);
                     itemlist.add("Phone Number: " + user_phonenumber);
                     itemlist.add(user_desc);
-                    itemlist.add("Licensed" + user_license);
+                    itemlist.add("Licensed: " + user_license);
 
                     adapter = new ArrayAdapter<>(WelcomePage.this, android.R.layout.simple_list_item_1, itemlist);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -175,4 +185,11 @@ public class WelcomePage extends AppCompatActivity {
         intent.putExtra(EXTRA_TEXT1, providerUser);            // send username of provider to page where they can edit info
         startActivity(intent);
     }
+
+    public void openAdvancedInfo(String providerUser){
+        Intent intent = new Intent(this, providerAdvancedInfo.class);
+        intent.putExtra(EXTRA_TEXT1, providerUser);
+        startActivity(intent);
+    }
+
 }
