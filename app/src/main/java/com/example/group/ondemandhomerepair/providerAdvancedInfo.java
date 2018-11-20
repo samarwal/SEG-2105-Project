@@ -49,24 +49,11 @@ public class providerAdvancedInfo extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                            if(providerUsername.equals(String.valueOf(dsp.child("username").getValue().toString())) && dsp.child("roleType").getValue().toString().equals("Service Provider")){  //find the provider in firebase and get ID
+                            if(providerUsername.equals(String.valueOf(dsp.child("username").getValue().toString())) && dsp.child("roleType").getValue().toString().equals("Service Provider")) {  //find the provider in firebase and get ID
                                 providerID = dsp.getKey();
                             }
                         }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                }
-        );
-
-        FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myServices").addListenerForSingleValueEvent(    // get the info of the provider
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                        for (DataSnapshot dsp : dataSnapshot.child(providerID).child("myServices").getChildren()) {
                             Service temp = new Service("a", 0);
                             temp.setServiceName(String.valueOf(dsp.child("serviceName").getValue()));
                             temp.setHourlyRate(Integer.valueOf(dsp.child("hourlyRate").getValue(int.class)));
@@ -85,12 +72,7 @@ public class providerAdvancedInfo extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(                // fill the spinner in the page with contents
                 this, android.R.layout.simple_spinner_item, providerServiceList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         myServiceList.setAdapter(adapter);
     }
-
-
-    public void fillArray(String theID){
-
-    }
-
 }
