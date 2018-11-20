@@ -108,15 +108,15 @@ public class EditServiceProviderInfo extends AppCompatActivity {
 
     public boolean statusValidate() {
 
-        if (Address.getText().toString().equals("")) {
+        if (Address.getText().toString().equals("") || Address.getText().toString() == null) {
             errorMessage.setText("! Address is empty");
             return false;
         }
-        if (phoneNumber.getText().toString().trim().equals("")) {
+        if (phoneNumber.getText().toString().trim().equals("") || phoneNumber.getText().toString().trim() == null) {
             errorMessage.setText("! Phone Number is empty");
             return false;
         }
-        if (Company.getText().toString().trim().equals("")) {
+        if (Company.getText().toString().trim().equals("") || Company.getText().toString().trim() == null) {
             errorMessage.setText("! Company is empty");
             return false;
         }
