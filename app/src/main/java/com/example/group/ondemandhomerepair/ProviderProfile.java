@@ -16,7 +16,7 @@ public class ProviderProfile {
         this.providerlicense =  license;
     }
 
-    /*public int getphonenumber(){
+    public int getphonenumber(){
         return this.phonenumber;
     }
 
@@ -51,5 +51,5 @@ public class ProviderProfile {
     public String toString(){
         return "PhoneNumber: "+this.phonenumber+" | Address: "+this.address+
                 " | Description: "+this.profiledescription+ "| Company: "+this.company;
-    }*/
+    }
 }
