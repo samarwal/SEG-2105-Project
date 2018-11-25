@@ -28,8 +28,11 @@
             android:label="@string/title_activity_edit_service_provider_time" />
         <activity
             android:name=".editServiceProviderServices"
-            android:label="@string/title_activity_edit_service_provider_services"></activity>
+            android:label="@string/title_activity_edit_service_provider_services" />
         <activity android:name=".providerAdvancedInfo" />
+        <activity
+            android:name=".Calender"
+            android:label="@string/title_activity_calender"></activity>
     </application>
 
 </manifest>

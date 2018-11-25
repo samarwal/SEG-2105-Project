@@ -98,7 +98,7 @@ public class EditServiceProviderInfo extends AppCompatActivity {
         changeTimes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(EditServiceProviderInfo.this, editServiceProviderTime.class);
+                Intent intent = new Intent(EditServiceProviderInfo.this, Calender.class);
                 intent.putExtra(EXTRA_TEXT1, providerUser);
                 startActivity(intent);
             }

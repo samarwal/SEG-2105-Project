@@ -18,6 +18,8 @@
     <string name="title_activity_edit_service_provider_services">editServiceProviderServices
     </string>
     <string name="YES">string</string>
+    <string name="title_activity_calendar_view">CalendarView</string>
+    <string name="title_activity_calender">Calender</string>
 
 
 </resources>
