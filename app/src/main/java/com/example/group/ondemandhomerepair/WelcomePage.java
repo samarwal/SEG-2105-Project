@@ -58,6 +58,9 @@ public class WelcomePage extends AppCompatActivity {
         Button advancedInfoButton = (Button)findViewById(R.id.providerAdvancedButt);
         advancedInfoButton.setVisibility(View.GONE);
 
+        Button searchProvider = (Button) findViewById(R.id.searchProv);
+        searchProvider.setVisibility(View.GONE);
+
         final Intent intent = getIntent();                                    // create intent by taking from previous intent
 
         TextView userName = (TextView)findViewById(R.id.userField);        // get text views
@@ -115,6 +118,16 @@ public class WelcomePage extends AppCompatActivity {
                 @Override
                 public void onClick(View v){
                     openEditServices();
+                }
+            });
+        }
+
+        if(userType.getText().equals("User")){
+            searchProvider.setVisibility(View.VISIBLE);
+            searchProvider.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    startActivity(new Intent(WelcomePage.this, ProviderSearch.class));
                 }
             });
         }
@@ -189,6 +202,11 @@ public class WelcomePage extends AppCompatActivity {
     public void openAdvancedInfo(String providerUser){
         Intent intent = new Intent(this, providerAdvancedInfo.class);
         intent.putExtra(EXTRA_TEXT1, providerUser);
+        startActivity(intent);
+    }
+
+    public void openProviderSearch(){
+        Intent intent = new Intent(this, ProviderSearch.class);
         startActivity(intent);
     }
 

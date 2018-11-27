@@ -3,18 +3,21 @@ package com.example.group.ondemandhomerepair;
 public class Service {
 
     private String name;
-    private int hourlyRate;
+    private String hourlyRate;
 
-    public Service(String n, int hR){
+    public Service(String n, String hR){
         this.name = n;
         this.hourlyRate = hR;
+    }
+
+    public Service(){
     }
 
     public String getServiceName(){
         return this.name;
     }
 
-    public int getHourlyRate(){
+    public String getHourlyRate(){
         return this.hourlyRate;
     }
 
@@ -22,7 +25,7 @@ public class Service {
         this.name = n;
     }
 
-    public void setHourlyRate(int hR){
+    public void setHourlyRate(String hR){
         this.hourlyRate = hR;
     }
 
