@@ -72,7 +72,7 @@ public class EditServiceProviderInfo extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(EditServiceProviderInfo.this, "Profile Creation successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(EditServiceProviderInfo.this, WelcomePage.class));
+                                startActivity(new Intent(EditServiceProviderInfo.this, EditServiceProviderInfo.class));
                             } else {
                                 Toast.makeText(EditServiceProviderInfo.this, "Profile did not create properly", Toast.LENGTH_SHORT).show();
                             }

@@ -10,6 +10,9 @@ public class Service {
         this.hourlyRate = hR;
     }
 
+    public Service(){
+    }
+
     public String getServiceName(){
         return this.name;
     }
