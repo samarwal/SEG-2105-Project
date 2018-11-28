@@ -1,44 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_marginTop="180dp">
 
     <TextView
         android:id="@+id/ServiceName"
-        android:layout_width="155dp"
-        android:layout_height="61dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="151dp"
+        android:layout_height="29dp"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
-        android:text="Service Name"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="16dp"
+        android:text="   Service Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:textSize="24sp" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/Rating"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ServiceName"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
-        android:text="Rating: "
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/Hourly_Rate"
-        android:layout_width="104dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ServiceName"
-        android:layout_alignStart="@+id/Rating"
-        android:layout_alignLeft="@+id/Rating"
-        android:layout_marginBottom="9dp"
-        android:text="Hourly Rate:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

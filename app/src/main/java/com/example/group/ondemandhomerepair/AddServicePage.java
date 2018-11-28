@@ -44,7 +44,7 @@ public class AddServicePage extends AppCompatActivity {
 
                     Service user = new Service(
                             Name,
-                            Rate
+                            Integer.parseInt(Rate)
                     );
 
                     FirebaseDatabase.getInstance().getReference("Services")

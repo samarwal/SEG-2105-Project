@@ -67,7 +67,7 @@ public class ProviderSearch extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(ServicesViewHolder viewHolder, Service model, int position) {
-                viewHolder.setDetails(model.getServiceName(), model.getHourlyRate());
+                viewHolder.setDetails(model.getServiceName());
             }
         };
 
@@ -86,14 +86,14 @@ public class ProviderSearch extends AppCompatActivity {
             mView = itemView;
         }
 
-        public void setDetails(String serviceName, String hourlyRate){
+        public void setDetails(String serviceName){
 
             TextView service_name = (TextView) mView.findViewById(R.id.ServiceName);
             //TextView rating = (TextView) mView.findViewById(R.id.Rating);
-            TextView hourly_rate = (TextView) mView.findViewById(R.id.Hourly_Rate);
+           // TextView hourly_rate = (TextView) mView.findViewById(R.id.Hourly_Rate);
 
             service_name.setText(serviceName);
-            hourly_rate.setText(hourlyRate);
+            //hourly_rate.setText(hourlyRate);
         }
     }
 
