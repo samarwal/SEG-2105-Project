@@ -52,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userField" />
 
-<<<<<<< HEAD
+
     <Spinner
         android:id="@+id/accountList"
         android:layout_width="368dp"
@@ -67,8 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/typeField" />
 
-=======
->>>>>>> cbd7e962eb23038585290503bd89691c26fd945c
+
     <Button
         android:id="@+id/addServiceButt"
         android:layout_width="wrap_content"

@@ -54,9 +54,9 @@ public class EditServicePage extends AppCompatActivity {
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                             Service temp = new Service("",0);
                             temp.setServiceName(String.valueOf(dsp.child("serviceName").getValue()));
-                            //temp.setHourlyRate(Integer.valueOf(String.valueOf(dsp.child("hourlyRate").getValue())));
+                            temp.setHourlyRate(Integer.valueOf(String.valueOf(dsp.child("hourlyRate").getValue())));
                             //services.add(String.valueOf(dsp.getKey()));
-                            services.add(temp.getServiceName());
+                            services.add(temp.toString());
                         }
                     }
                     @Override
