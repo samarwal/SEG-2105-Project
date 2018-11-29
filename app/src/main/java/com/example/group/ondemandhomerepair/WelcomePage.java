@@ -40,8 +40,7 @@ public class WelcomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_page);
 
-        Spinner accountsList = (Spinner)findViewById(R.id.accountList); // find drop down and set as invisible
-        accountsList.setVisibility(View.GONE);
+
 
         Button addServiceButton = (Button)findViewById(R.id.addServiceButt);    // find admin buttons and set to invisible
         addServiceButton.setVisibility(View.GONE);
@@ -96,7 +95,7 @@ public class WelcomePage extends AppCompatActivity {
         );
 
         if(userType.getText().equals("Admin")){                             // admin tools show when admin is logged in
-            accountsList.setVisibility(View.VISIBLE);
+
             addServiceButton.setVisibility(View.VISIBLE);
 
             addServiceButton.setOnClickListener(new View.OnClickListener() {
