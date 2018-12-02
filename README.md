@@ -1,4 +1,5 @@
-[![CircleCI](https://circleci.com/gh/SEG-2105-Project/samarwal/tree/development.svg?style=svg)](https://circleci.com/gh/SEG-2105-Project/samarwal/tree/development)
+Build Status
+[![Build Status](https://circleci.com/gh/samarwal/SEG-2105-Project.png?branch=master)](https://circleci.com/gh/samarwal/SEG-2105-Project)
 
 
 # SEG-2105-Project
