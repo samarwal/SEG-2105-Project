@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText8"
+        android:id="@+id/startHour"
         android:layout_width="71dp"
         android:layout_height="53dp"
         android:layout_marginBottom="8dp"
@@ -40,7 +40,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/endHour"
         android:layout_width="69dp"
         android:layout_height="52dp"
         android:layout_marginBottom="11dp"
@@ -49,11 +49,11 @@
         android:ems="10"
         android:hint="Hour:"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toStartOf="@+id/editText7" />
+        app:layout_constraintBottom_toTopOf="@+id/addTime"
+        app:layout_constraintEnd_toStartOf="@+id/endMiinute" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/addTime"
         android:layout_width="162dp"
         android:layout_height="66dp"
         android:layout_marginBottom="28dp"
@@ -77,7 +77,7 @@
         app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/startMinute"
         android:layout_width="68dp"
         android:layout_height="52dp"
         android:layout_marginBottom="11dp"
@@ -88,9 +88,9 @@
         android:ems="10"
         android:hint="Minute"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
-        app:layout_constraintStart_toEndOf="@+id/editText8"
+        app:layout_constraintBottom_toTopOf="@+id/addTime"
+        app:layout_constraintEnd_toStartOf="@+id/endHour"
+        app:layout_constraintStart_toEndOf="@+id/startHour"
         app:layout_constraintTop_toBottomOf="@+id/textView12"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -104,12 +104,12 @@
         android:text="End Time"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText7"
+        app:layout_constraintBottom_toTopOf="@+id/endMiinute"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/endMiinute"
         android:layout_width="66dp"
         android:layout_height="51dp"
         android:layout_marginBottom="105dp"
