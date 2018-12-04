@@ -7,9 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+<<<<<<< HEAD
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+=======
+>>>>>>> 3229af33631a0d0ae840f4fb6e878abd3e9ff97f
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -17,18 +20,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+<<<<<<< HEAD
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+=======
+>>>>>>> 3229af33631a0d0ae840f4fb6e878abd3e9ff97f
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+<<<<<<< HEAD
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+=======
+>>>>>>> 3229af33631a0d0ae840f4fb6e878abd3e9ff97f
 
 public class ProviderSearch extends AppCompatActivity {
 
@@ -47,12 +56,19 @@ public class ProviderSearch extends AppCompatActivity {
         mUserDatabase = FirebaseDatabase.getInstance().getReference("Services");
 
         mSearchField = (EditText) findViewById(R.id.search_field);
+<<<<<<< HEAD
         mSearchBtn = (Button) findViewById(R.id.button2);
         mSearchByRate = (Button)findViewById(R.id.rateSearchButt);
         mSearchForProvider = (Button)findViewById((R.id.button5));
         mResultList = (ListView) findViewById(R.id.listings);
 //        mResultList.setHasFixedSize(true);
 //        mResultList.setLayoutManager(new LinearLayoutManager(this));
+=======
+        mSearchBtn = (Button) findViewById(R.id.addTime);
+        mResultList = (RecyclerView) findViewById(R.id.result_list);
+        mResultList.setHasFixedSize(true);
+        mResultList.setLayoutManager(new LinearLayoutManager(this));
+>>>>>>> 3229af33631a0d0ae840f4fb6e878abd3e9ff97f
 
 
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
