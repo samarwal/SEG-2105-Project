@@ -22,9 +22,8 @@ public class SetTime extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calender);
-    }}
-        /*
+        setContentView(R.layout.activity_set_time);
+
         CalendarView calendarView = findViewById(R.id.calendarSet);
         startHour = findViewById(R.id.startHour2);
         startMinute = findViewById(R.id.startMinute2);
@@ -52,7 +51,7 @@ public class SetTime extends Activity {
                     timeslot.setYear(year);
                     timeslot.setMonth(month);
                     timeslot.setDay(day);
-
+                    //DATA TRANSFER IS HERE. ENTER intent.putExtra("KEY", DATA)
                     Intent intent = new Intent(SetTime.this, ProviderSearch.class);
                     intent.putExtra("1", timeslot.getYear());
                     intent.putExtra("2", timeslot.getMonth());
@@ -90,4 +89,3 @@ public class SetTime extends Activity {
         return true;
     }
 }
-*/

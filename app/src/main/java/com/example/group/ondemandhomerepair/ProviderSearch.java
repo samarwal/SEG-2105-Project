@@ -64,10 +64,14 @@ public class ProviderSearch extends AppCompatActivity {
 //        mSearchBtn = (Button) findViewById(R.id.addTime);
 //        mResultList = (RecyclerView) findViewById(R.id.result_list);
         Intent intent = getIntent();
-        //timeslot = new Timeslot(Integer.valueOf(intent.getStringExtra("4")), Integer.valueOf(intent.getStringExtra("5")), Integer.valueOf(intent.getStringExtra("6")), Integer.valueOf(intent.getStringExtra("7")));
-        //timeslot.setYear(Integer.valueOf(intent.getStringExtra("1")));
-        //timeslot.setMonth(Integer.valueOf(intent.getStringExtra("2")));
-        //timeslot.setDay(Integer.valueOf(intent.getStringExtra("3")));
+
+        //INFORMATION TRANSFER
+        if (intent.getStringExtra("1") != null){
+            timeslot = new Timeslot(Integer.valueOf(intent.getStringExtra("4")), Integer.valueOf(intent.getStringExtra("5")), Integer.valueOf(intent.getStringExtra("6")), Integer.valueOf(intent.getStringExtra("7")));
+            timeslot.setYear(Integer.valueOf(intent.getStringExtra("1")));
+            timeslot.setMonth(Integer.valueOf(intent.getStringExtra("2")));
+            timeslot.setDay(Integer.valueOf(intent.getStringExtra("3")));
+        }
 
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override

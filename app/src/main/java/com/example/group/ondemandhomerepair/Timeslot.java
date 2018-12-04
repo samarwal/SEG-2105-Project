@@ -24,4 +24,27 @@ public class Timeslot {
     public void setDay(int day){
         this.day = day;
     }
+    public int getYear(){
+        return year;
+    }
+
+    public int getMonth(){
+        return month;
+    }
+    public int getDay(){
+        return day;
+    }
+    public int getSHour(){
+        return sHour;
+    }
+    public int getSMinute(){
+        return sMinute;
+    }
+    public int getEHour(){
+        return eHour;
+    }
+    public int getEMinute(){
+        return eMinute;
+    }
+
 }
