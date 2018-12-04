@@ -14,6 +14,7 @@ public class Calender extends Activity {
     private EditText startMinute;
     private EditText endHour;
     private EditText endMinute;
+    private String date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +27,13 @@ public class Calender extends Activity {
         endMinute = findViewById(R.id.endMiinute);
         Button addTime = findViewById(R.id.addTime);
 
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 //stuff that runs when the new date is clicked
 
-                String date = i+"/"+i1+""+i2;
+                date = i+"/"+i1+""+i2;
                 //i = year / i1 = month /  12 = day
             }
         });
@@ -40,7 +42,8 @@ public class Calender extends Activity {
             @Override
             public void onClick(View v) {
                 if(statusValidate()){
-                //firebase stuff
+                    Timeslot timeslot = new Timeslot(date, Integer.valueOf(startHour.getText().toString().trim()), Integer.valueOf(startMinute.getText().toString().trim()), Integer.valueOf(endHour.getText().toString().trim()), Integer.valueOf(endMinute.getText().toString().trim()));
+                    //push timeslot to firebase
                 }
             }
 
@@ -52,7 +55,7 @@ public class Calender extends Activity {
             Toast.makeText(Calender.this, "Time Component was left Empty", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (startHour.getText().toString().trim().matches( "[0-9]+") || endHour.getText().toString().trim().matches( "[0-9]+") || startMinute.getText().toString().trim().matches( "[0-9]+") || endMinute.getText().toString().trim().matches( "[0-9]+")) {
+        if (!startHour.getText().toString().trim().matches( "[0-9]+") || !endHour.getText().toString().trim().matches( "[0-9]+") || !startMinute.getText().toString().trim().matches( "[0-9]+") || !endMinute.getText().toString().trim().matches( "[0-9]+")) {
             Toast.makeText(Calender.this, "Times are Non-numberic", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -61,7 +64,7 @@ public class Calender extends Activity {
             return false;
         }
         if (Integer.valueOf(startMinute.getText().toString().trim()) > 59 || Integer.valueOf(endMinute.getText().toString().trim()) > 59) {
-            Toast.makeText(Calender.this, "Hours are Invalid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Calender.this, "Minutes are Invalid", Toast.LENGTH_SHORT).show();
             return false;
         }
 
