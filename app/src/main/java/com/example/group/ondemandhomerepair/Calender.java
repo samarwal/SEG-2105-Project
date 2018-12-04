@@ -1,5 +1,6 @@
 package com.example.group.ondemandhomerepair;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -9,12 +10,23 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT1;
+
 public class Calender extends Activity {
     private EditText startHour;
     private EditText startMinute;
     private EditText endHour;
     private EditText endMinute;
-    private String date;
+    private int year;
+    private int month;
+    private int day;
+    private String providerID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,14 +38,35 @@ public class Calender extends Activity {
         endHour = findViewById(R.id.endHour);
         endMinute = findViewById(R.id.endMiinute);
         Button addTime = findViewById(R.id.addTime);
+        Intent intent = getIntent();
+        final String providerName = intent.getStringExtra(EXTRA_TEXT1);
 
+        FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(    // get the ID of the provider in firebase
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                            if(providerName.equals(String.valueOf(dsp.child("username").getValue().toString())) && dsp.child("roleType").getValue().toString().equals("Service Provider")){  //find the provider in firebase and get ID  //TODO this line is what makes it crash
+                                providerID = dsp.getKey();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                }
+        );
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 //stuff that runs when the new date is clicked
-
-                date = i+"/"+i1+""+i2;
+                year = i;
+                month = i1;
+                day = i2;
+                //date = i1+"/"+i2+"/"+i;
                 //i = year / i1 = month /  12 = day
             }
         });
@@ -42,8 +75,11 @@ public class Calender extends Activity {
             @Override
             public void onClick(View v) {
                 if(statusValidate()){
-                    Timeslot timeslot = new Timeslot(date, Integer.valueOf(startHour.getText().toString().trim()), Integer.valueOf(startMinute.getText().toString().trim()), Integer.valueOf(endHour.getText().toString().trim()), Integer.valueOf(endMinute.getText().toString().trim()));
-                    //push timeslot to firebase
+                    Timeslot timeslot = new Timeslot(Integer.valueOf(startHour.getText().toString().trim()), Integer.valueOf(startMinute.getText().toString().trim()), Integer.valueOf(endHour.getText().toString().trim()), Integer.valueOf(endMinute.getText().toString().trim()));
+                    timeslot.setYear(year);
+                    timeslot.setMonth(month);
+                    timeslot.setDay(day);
+                    FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myTimes").push().setValue(timeslot);
                 }
             }
 
