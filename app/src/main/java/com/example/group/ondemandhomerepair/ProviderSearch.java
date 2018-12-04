@@ -92,9 +92,12 @@ public class ProviderSearch extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String username = String.valueOf(adapterView.getItemAtPosition(i));
-                Intent intent = new Intent(ProviderSearch.this, UserGetProviderInfo.class);
-                intent.putExtra(EXTRA_TEXT, username);
-                startActivity(intent);
+                if(username.indexOf('@') >= 0){ // check if selected option is a provider
+                    Intent intent = new Intent(ProviderSearch.this, UserGetProviderInfo.class);
+                    intent.putExtra(EXTRA_TEXT, username);
+                    startActivity(intent);
+                }
+
             }
         });
 
