@@ -10,6 +10,7 @@ import android.view.View;
 
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import android.widget.Button;
@@ -32,6 +33,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import static android.content.Intent.EXTRA_TEXT;
 
 
 public class ProviderSearch extends AppCompatActivity {
@@ -85,6 +87,17 @@ public class ProviderSearch extends AppCompatActivity {
                 firebaseByServiceSearch(searchText);
             }
         });
+
+        mResultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String username = String.valueOf(adapterView.getItemAtPosition(i));
+                Intent intent = new Intent(ProviderSearch.this, UserGetProviderInfo.class);
+                intent.putExtra(EXTRA_TEXT, username);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -184,7 +197,7 @@ public class ProviderSearch extends AppCompatActivity {
                            if (String.valueOf(dsp.child("roleType").getValue()).equals("Service Provider")){       // find providers
                                for (DataSnapshot dsp2 : dataSnapshot.child(dsp.getKey()).child("myServices").getChildren()) {   // search through found providers services
                                    if(String.valueOf(dsp2.child("serviceName").getValue()).equals(searchedServiceName)){   // does provider provide service searched for?
-                                       getRatingsList.add(String.valueOf(dsp.child("username").getValue()) + " " +String.valueOf(dsp2.child("rating").getValue()));    // add provider name and rating to list
+                                       getRatingsList.add(String.valueOf(dsp.child("username").getValue()) + ", Rating: " +String.valueOf(dsp2.child("rating").getValue()));    // add provider name and rating to list
                                         //TODO ratings need to be added to database to be searched
                                    }
                                }
