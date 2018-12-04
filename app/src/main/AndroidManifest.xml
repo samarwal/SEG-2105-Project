@@ -24,6 +24,7 @@
         <activity android:name=".EditServicePage" />
         <activity android:name=".EditServiceProviderInfo" />
         <activity android:name=".ProviderSearch" />
+        <activity android:name=".SetTime" />
         <activity
             android:name=".editServiceProviderTime"
             android:label="@string/title_activity_edit_service_provider_time" />

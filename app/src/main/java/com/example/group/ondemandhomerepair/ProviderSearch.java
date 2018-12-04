@@ -10,7 +10,6 @@ import android.view.View;
 
 import android.view.ViewGroup;
 import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import android.widget.Button;
@@ -33,7 +32,6 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-import static android.content.Intent.EXTRA_TEXT;
 
 
 public class ProviderSearch extends AppCompatActivity {
@@ -42,8 +40,10 @@ public class ProviderSearch extends AppCompatActivity {
     private Button mSearchBtn;
     private Button mSearchByRate;
     private Button mSearchForProvider;
+    private Button mEditTimeButton;
     private ListView mResultList;
     private DatabaseReference mUserDatabase;
+    private Timeslot timeslot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +58,16 @@ public class ProviderSearch extends AppCompatActivity {
         mSearchByRate = (Button)findViewById(R.id.rateSearchButt);
         mSearchForProvider = (Button)findViewById((R.id.button5));
         mResultList = (ListView) findViewById(R.id.listings);
+        mEditTimeButton = findViewById(R.id.button4);
 //        mResultList.setHasFixedSize(true);
 //        mResultList.setLayoutManager(new LinearLayoutManager(this));
 //        mSearchBtn = (Button) findViewById(R.id.addTime);
 //        mResultList = (RecyclerView) findViewById(R.id.result_list);
-
-
+        Intent intent = getIntent();
+        //timeslot = new Timeslot(Integer.valueOf(intent.getStringExtra("4")), Integer.valueOf(intent.getStringExtra("5")), Integer.valueOf(intent.getStringExtra("6")), Integer.valueOf(intent.getStringExtra("7")));
+        //timeslot.setYear(Integer.valueOf(intent.getStringExtra("1")));
+        //timeslot.setMonth(Integer.valueOf(intent.getStringExtra("2")));
+        //timeslot.setDay(Integer.valueOf(intent.getStringExtra("3")));
 
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,20 +92,11 @@ public class ProviderSearch extends AppCompatActivity {
             }
         });
 
-        mResultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String username = String.valueOf(adapterView.getItemAtPosition(i));
-                if(username.indexOf('@') >= 0){ // check if selected option is a provider
-                    Intent intent = new Intent(ProviderSearch.this, UserGetProviderInfo.class);
-                    intent.putExtra(EXTRA_TEXT, username);
-                    startActivity(intent);
-                }
-
+        mEditTimeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(ProviderSearch.this, SetTime.class));
             }
         });
-
-
     }
 
     private void firebaseUserSearch(final String searchText) {
@@ -200,7 +195,7 @@ public class ProviderSearch extends AppCompatActivity {
                            if (String.valueOf(dsp.child("roleType").getValue()).equals("Service Provider")){       // find providers
                                for (DataSnapshot dsp2 : dataSnapshot.child(dsp.getKey()).child("myServices").getChildren()) {   // search through found providers services
                                    if(String.valueOf(dsp2.child("serviceName").getValue()).equals(searchedServiceName)){   // does provider provide service searched for?
-                                       getRatingsList.add(String.valueOf(dsp.child("username").getValue()) + ", Rating: " +String.valueOf(dsp2.child("rating").getValue()));    // add provider name and rating to list
+                                       getRatingsList.add(String.valueOf(dsp.child("username").getValue()) + " " +String.valueOf(dsp2.child("rating").getValue()));    // add provider name and rating to list
                                         //TODO ratings need to be added to database to be searched
                                    }
                                }
