@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +25,8 @@ public class UserGetProviderInfo extends AppCompatActivity {
     TextView providerDisplay;
     ListView TimesDisplayer;
     String uid;
+    final ArrayList<String> displayTimes = new ArrayList<String>();
+    final ArrayList<Timeslot> timesList = new ArrayList<Timeslot>();
 
 
     @Override
@@ -39,22 +42,27 @@ public class UserGetProviderInfo extends AppCompatActivity {
         providerUser.setText(intent.getStringExtra(EXTRA_TEXT));
         final String providerUsername = intent.getStringExtra(EXTRA_TEXT);
 
+
+
         FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent( // get the ID of the provider in firebase
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                             if(providerUsername.equals(String.valueOf(dsp.child("username").getValue().toString())) && dsp.child("roleType").getValue().toString().equals("Service Provider")){  //find the provider in firebase and get ID
-                                uid = dsp.getKey();
+                                uid = String.valueOf(dsp.getKey());
                                 FirebaseDatabase.getInstance().getReference().child("ProviderProfileInfo").child(uid).addListenerForSingleValueEvent(new ValueEventListener() { // once id is obtained get provider info
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        ProviderProfile temp = new ProviderProfile();
-                                        temp.setCompany(String.valueOf(dataSnapshot.child("company").getValue()));
-                                        temp.setAddress(String.valueOf(dataSnapshot.child("address").getValue()));
-                                        temp.setPhonenumber(Integer.valueOf(String.valueOf(dataSnapshot.child("phonenumber").getValue())));
-                                        temp.setProfiledescription(String.valueOf(dataSnapshot.child("profiledescription").getValue()));
-                                        providerDisplay.setText(temp.toString());   // display providers info
+                                        boolean checker = dataSnapshot.exists();
+                                        if(checker) { // check if provider has information with account
+                                            ProviderProfile temp = new ProviderProfile();
+                                            temp.setCompany(String.valueOf(dataSnapshot.child("company").getValue()));
+                                            temp.setAddress(String.valueOf(dataSnapshot.child("address").getValue()));
+                                            temp.setPhonenumber(Integer.valueOf(String.valueOf(dataSnapshot.child("phonenumber").getValue())));
+                                            temp.setProfiledescription(String.valueOf(dataSnapshot.child("profiledescription").getValue()));
+                                            providerDisplay.setText(temp.toString());   // display providers info
+                                        }
                                     }
 
                                     @Override
@@ -62,6 +70,43 @@ public class UserGetProviderInfo extends AppCompatActivity {
 
                                     }
                                 });
+                                FirebaseDatabase.getInstance().getReference("Users").child(uid).child("myTimes").addListenerForSingleValueEvent(new ValueEventListener() { // get the times for provider
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        Boolean look = dataSnapshot.exists();   // check if provider has times
+                                        if(look) {
+                                            for (DataSnapshot dsp2 : dataSnapshot.getChildren()) {  // if they do display times
+                                                int a = Integer.valueOf(String.valueOf(dsp2.child("sHour").getValue()));
+                                                int b = Integer.valueOf(String.valueOf(dsp2.child("sMinute").getValue()));
+                                                int c = Integer.valueOf(String.valueOf(dsp2.child("eHour").getValue()));
+                                                int d = Integer.valueOf(String.valueOf(dsp2.child("eMinute").getValue()));
+
+                                                Timeslot temp = new Timeslot(a, b, c, d);
+                                                temp.setDay(Integer.valueOf(String.valueOf(dsp2.child("day").getValue())));
+                                                temp.setMonth(Integer.valueOf(String.valueOf(dsp2.child("month").getValue())));
+                                                temp.setYear(Integer.valueOf(String.valueOf(dsp2.child("year").getValue())));
+                                                displayTimes.add(temp.toString());
+                                                timesList.add(temp);
+                                            }
+                                            ArrayAdapter<String> hold = new ArrayAdapter<String>(UserGetProviderInfo.this, android.R.layout.simple_list_item_1,displayTimes);
+                                            hold.setDropDownViewResource(android.R.layout.activity_list_item);
+                                            TimesDisplayer.setAdapter(hold);
+                                        }
+                                        if(!look){                                                       //otherwise give a message saying no
+                                            displayTimes.add("This provider doesn't have times");
+                                            ArrayAdapter<String> hold = new ArrayAdapter<String>(UserGetProviderInfo.this, android.R.layout.simple_list_item_1,displayTimes);
+                                            hold.setDropDownViewResource(android.R.layout.activity_list_item);
+                                            TimesDisplayer.setAdapter(hold);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
                             }
                         }
                     }
@@ -73,30 +118,5 @@ public class UserGetProviderInfo extends AppCompatActivity {
                 }
         );
 
-        final ArrayList<String> displayTimes = new ArrayList<String>();
-        displayTimes.add("Test Dummy");
-        final ArrayList<Timeslot> timesList = new ArrayList<Timeslot>();
-// TODO database pathing needs work
-//        FirebaseDatabase.getInstance().getReference("Users").child(uid).child("myTimes").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot dsp : dataSnapshot.getChildren()){
-//                    Timeslot temp = new Timeslot(Integer.valueOf(String.valueOf(dsp.child("sHour"))),Integer.valueOf(String.valueOf(dsp.child("sMinute"))),Integer.valueOf(String.valueOf(dsp.child("eHour"))),Integer.valueOf(String.valueOf(dsp.child("eMinute"))));
-//                    temp.setDay(Integer.valueOf(String.valueOf(dsp.child("day"))));
-//                    temp.setMonth(Integer.valueOf(String.valueOf(dsp.child("month"))));
-//                    temp.setYear(Integer.valueOf(String.valueOf(dsp.child("year"))));
-//                    displayTimes.add(temp.toString());
-//                    timesList.add(temp);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-        ArrayAdapter<String> hold = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,displayTimes);
-        hold.setDropDownViewResource(android.R.layout.activity_list_item);
-        TimesDisplayer.setAdapter(hold);
     }
 }

@@ -25,7 +25,7 @@
         android:layout_marginLeft="72dp"
         android:layout_marginStart="72dp"
         android:layout_marginTop="92dp"
-        android:text="here is where the info could go"
+        android:text="This provider does not have information"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +51,7 @@
         android:layout_marginBottom="284dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="Choose a time (Note: a list would be under this to show times)"
+        android:text="Choose a time:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
