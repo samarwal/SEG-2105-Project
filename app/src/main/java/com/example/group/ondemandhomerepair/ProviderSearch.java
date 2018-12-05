@@ -10,6 +10,7 @@ import android.view.View;
 
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import android.widget.Button;
@@ -32,6 +33,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import static android.content.Intent.EXTRA_TEXT;
 
 
 public class ProviderSearch extends AppCompatActivity {
@@ -105,6 +107,19 @@ public class ProviderSearch extends AppCompatActivity {
                 startActivity(new Intent(ProviderSearch.this, SetTime.class));
             }
         });
+        mResultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String username = String.valueOf(adapterView.getItemAtPosition(i));
+                if(username.indexOf('@') >= 0){ // check if selected option is a provider
+                    Intent intent = new Intent(ProviderSearch.this, UserGetProviderInfo.class);
+                    intent.putExtra(EXTRA_TEXT, username);
+                    startActivity(intent);
+                }
+            }
+        });
+
+
     }
 
     private void firebaseUserSearch(final String searchText) {
