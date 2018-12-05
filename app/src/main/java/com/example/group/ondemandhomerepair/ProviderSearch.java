@@ -10,7 +10,6 @@ import android.view.View;
 
 import android.view.ViewGroup;
 import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import android.widget.Button;
@@ -33,7 +32,6 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-import static android.content.Intent.EXTRA_TEXT;
 
 
 public class ProviderSearch extends AppCompatActivity {
@@ -89,6 +87,7 @@ public class ProviderSearch extends AppCompatActivity {
         mSearchByRate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                //Toast.makeText(ProviderSearch.this, tester, Toast.LENGTH_SHORT).show();
                 String searchText = mSearchField.getText().toString();
                 firebaseByRateSearch(searchText);
             }
@@ -106,18 +105,6 @@ public class ProviderSearch extends AppCompatActivity {
                 startActivity(new Intent(ProviderSearch.this, SetTime.class));
             }
         });
-        mResultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String username = String.valueOf(adapterView.getItemAtPosition(i));
-                if(username.indexOf('@') >= 0){ // check if selected option is a provider
-                    Intent intent = new Intent(ProviderSearch.this, UserGetProviderInfo.class);
-                    intent.putExtra(EXTRA_TEXT, username);
-                    startActivity(intent);
-                }
-            }
-        });
-
     }
 
     private void firebaseUserSearch(final String searchText) {
@@ -186,12 +173,13 @@ public class ProviderSearch extends AppCompatActivity {
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {           // search through all users
                             if (String.valueOf(dsp.child("roleType").getValue()).equals("Service Provider")){       // find providers
                                 for (DataSnapshot dsp2 : dataSnapshot.child(dsp.getKey()).child("myServices").getChildren()) {   // search through found providers services
-                                    if(String.valueOf(dsp2.child("serviceName").getValue()).equals(searchedServiceName)){   // does provider provide service searched for?
+                                    //if(String.valueOf(dsp2.child("serviceName").getValue()).equals(searchedServiceName)){   // does provider provide service searched for?
                                         //Beginning of TIME FILTER
                                         if(timeslot!= null){
-                                            for (DataSnapshot dsp3 : dsp.child("myTimes").getChildren()){
+                                            for (DataSnapshot dsp3 : dataSnapshot.child(dsp.getKey()).child("myTimes").getChildren()){
                                                 if (Integer.valueOf(String.valueOf(dsp3.child("year").getValue())) == timeslot.getYear() && Integer.valueOf(String.valueOf(dsp3.child("month").getValue())) == timeslot.getMonth() && Integer.valueOf(String.valueOf(dsp3.child("day").getValue())) == timeslot.getDay()){
                                                     if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) < timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) > timeslot.getEHour()){
+                                                        //tester = String.valueOf(dsp.child("username").getValue());
                                                         getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
                                                     }
                                                     else if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) == timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) > timeslot.getEHour() ){
@@ -216,7 +204,7 @@ public class ProviderSearch extends AppCompatActivity {
                                         else {
                                             getProvidersList.add(String.valueOf(dsp.child("username").getValue()));    // add provider name to list
                                         }
-                                    }
+                                    //}
                                 }
                             }
                         }
