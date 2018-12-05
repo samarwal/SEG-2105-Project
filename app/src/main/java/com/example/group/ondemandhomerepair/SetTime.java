@@ -59,9 +59,9 @@ public class SetTime extends Activity {
 
 
                     //rating select idea start
-                    int selectedRadio = radGroup.getCheckedRadioButtonId();
-                    RadioButton selectedType = (RadioButton)findViewById(selectedRadio);
-                    String rating = selectedType.getText().toString();//rating is a string containing an int of how many stars is the min to show up in the search
+                    //int selectedRadio = radGroup.getCheckedRadioButtonId();
+                    //RadioButton selectedType = (RadioButton)findViewById(selectedRadio);
+                    //String rating = selectedType.getText().toString();//rating is a string containing an int of how many stars is the min to show up in the search
 
                     //rating select idea end
 
