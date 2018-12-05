@@ -76,6 +76,8 @@ public class ProviderSearch extends AppCompatActivity {
             timeslot.setYear(Integer.valueOf(String.valueOf(intent.getStringExtra("1"))));
             timeslot.setMonth(Integer.valueOf(String.valueOf(intent.getStringExtra("2"))));
             timeslot.setDay(Integer.valueOf(String.valueOf(intent.getStringExtra("3"))));
+
+            //Integer.valueOf(String.valueOf(intent.getStringExtra("8"))));//this is the Number of stars that is the lowest to be shown in the searching
         }
 
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
