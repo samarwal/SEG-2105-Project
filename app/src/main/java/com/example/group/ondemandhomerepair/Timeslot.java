@@ -46,5 +46,8 @@ public class Timeslot {
     public int getEMinute(){
         return eMinute;
     }
-
+    public String toString(){
+        return (String.valueOf(day) + "//" + String.valueOf(month) + "//" + String.valueOf(year) + " Start time: " + String.valueOf(sHour)+ ":" + String.valueOf(sMinute)
+                + " End time: " + String.valueOf(sHour)+ ":" + String.valueOf(sMinute));
+    }
 }

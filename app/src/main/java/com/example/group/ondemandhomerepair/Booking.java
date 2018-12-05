@@ -2,37 +2,47 @@ package com.example.group.ondemandhomerepair;
 
 public class Booking {
 
+
+    private String usersName;
+    private String providersName;
+    private String bookingTimes;
+
     private User user;
     private ProviderProfile provider;
     private Service service;
 
-    public Booking (User u, ProviderProfile p, Service s){
-        this.user = u;
-        this.provider = p;
-        this.service = s;
+    public Booking (String user, String provider, String times){
+        usersName = user;
+        providersName = provider;
+        bookingTimes = times;
+
     }
 
-    public User getUser(){
-        return this.user;
+    public String getUser(){
+        return this.usersName;
     }
 
-    public ProviderProfile getProvider(){
-        return this.provider;
+    public String getProvider(){
+        return this.providersName;
     }
 
-    public Service getService(){
-        return this.service;
+    public String getTimes(){
+        return this.bookingTimes;
     }
 
-    public void setUser(User u){
-        this.user = u;
+    public void setUser(String u){
+        this.usersName = u;
     }
 
-    public void setProvider(ProviderProfile p){
-        this.provider = p;
+    public void setProvider(String p){
+        this.providersName = p;
     }
 
-    public void setService(Service s){
-        this.service = s;
+    public void setTimes(String s){
+        this.bookingTimes = s;
+    }
+
+    public String toString(){
+        return ("Your name: " + usersName +  ", Provider: " + providersName + " Booked times: " + bookingTimes);
     }
 }
