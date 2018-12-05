@@ -12,9 +12,10 @@ public class Booking {
     private String bookingTimes;
     private String date;
 
-    public Booking (String user, String provider, String times){
+    public Booking (String user, String provider, String service, String times){
         usersName = user;
         providerName = provider;
+        serviceName = service;
         bookingTimes = times;
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class UserHistoryPage extends AppCompatActivity {
 
+    //private static final Object RateServicePage = ;
     Booking[] bookings;
 
     @Override
@@ -38,6 +40,13 @@ public class UserHistoryPage extends AppCompatActivity {
         CustomAdapter customAdapter = new CustomAdapter();
 
         listView.setAdapter(customAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(view.getContext(), RateServicePage.class);
+            }
+        });
     }
 
     class CustomAdapter extends BaseAdapter {
