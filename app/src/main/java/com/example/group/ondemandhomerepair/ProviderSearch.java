@@ -46,6 +46,7 @@ public class ProviderSearch extends AppCompatActivity {
     private ListView mResultList;
     private DatabaseReference mUserDatabase;
     private Timeslot timeslot;
+    private int rating;
     String tester;
 
     @Override
@@ -58,8 +59,8 @@ public class ProviderSearch extends AppCompatActivity {
         mSearchField = (EditText) findViewById(R.id.search_field);
 
         mSearchBtn = (Button) findViewById(R.id.addTime);
-        mSearchByRate = (Button)findViewById(R.id.rateSearchButt);
-        mSearchForProvider = (Button)findViewById((R.id.button5));
+        mSearchByRate = (Button) findViewById(R.id.rateSearchButt);
+        mSearchForProvider = (Button) findViewById((R.id.button5));
         mResultList = (ListView) findViewById(R.id.listings);
         mEditTimeButton = findViewById(R.id.button4);
 //        mResultList.setHasFixedSize(true);
@@ -70,12 +71,17 @@ public class ProviderSearch extends AppCompatActivity {
         tester = String.valueOf(intent.getStringExtra("1"));
         //INFORMATION TRANSFER
 
-        if (intent.getStringExtra("1") != null){
+        if (intent.getStringExtra("1") != null) {
             tester = String.valueOf(intent.getStringExtra("4"));
             timeslot = new Timeslot(Integer.valueOf(String.valueOf(intent.getStringExtra("4"))), Integer.valueOf(String.valueOf(intent.getStringExtra("5"))), Integer.valueOf(String.valueOf(intent.getStringExtra("6"))), Integer.valueOf(String.valueOf(intent.getStringExtra("7"))));
             timeslot.setYear(Integer.valueOf(String.valueOf(intent.getStringExtra("1"))));
             timeslot.setMonth(Integer.valueOf(String.valueOf(intent.getStringExtra("2"))));
             timeslot.setDay(Integer.valueOf(String.valueOf(intent.getStringExtra("3"))));
+
+            Integer rating = Integer.valueOf(String.valueOf(intent.getStringExtra("8")));//TODO this is the Number of stars that is the lowest to be shown in the searching
+            if (rating==null){
+                rating =0;
+            }
         }
 
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +92,7 @@ public class ProviderSearch extends AppCompatActivity {
             }
         });
 
-        mSearchByRate.setOnClickListener(new View.OnClickListener(){
+        mSearchByRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(ProviderSearch.this, tester, Toast.LENGTH_SHORT).show();
@@ -111,7 +117,7 @@ public class ProviderSearch extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String username = String.valueOf(adapterView.getItemAtPosition(i));
-                if(username.indexOf('@') >= 0){ // check if selected option is a provider
+                if (username.indexOf('@') >= 0) { // check if selected option is a provider
                     Intent intent = new Intent(ProviderSearch.this, UserGetProviderInfo.class);
                     intent.putExtra(EXTRA_TEXT, username);
                     startActivity(intent);
@@ -129,7 +135,7 @@ public class ProviderSearch extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference("Services").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot dsp : dataSnapshot.getChildren()) {
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                     if (String.valueOf(dsp.child("serviceName").getValue()).equals(searchText)) {      // if service name matches searched one add it to list
                         Service value = new Service("a", 0);
                         value.setServiceName(String.valueOf(dsp.child("serviceName").getValue()));
@@ -137,7 +143,7 @@ public class ProviderSearch extends AppCompatActivity {
                         //Toast.makeText(ProviderSearch.this, value.toString(), Toast.LENGTH_SHORT).show();
                         temp.add(value.toString());
                     }
-                    if(searchText.length() == 0){                                            // if they dont enter anything show all services
+                    if (searchText.length() == 0) {                                            // if they dont enter anything show all services
                         Service value = new Service("a", 0);
                         value.setServiceName(String.valueOf(dsp.child("serviceName").getValue()));
                         value.setHourlyRate(Integer.valueOf(String.valueOf(dsp.child("hourlyRate").getValue())));
@@ -152,7 +158,7 @@ public class ProviderSearch extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<String> hold = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,temp);
+        ArrayAdapter<String> hold = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, temp);
         hold.setDropDownViewResource(android.R.layout.activity_list_item);
         mResultList.setAdapter(hold);
 
@@ -177,7 +183,7 @@ public class ProviderSearch extends AppCompatActivity {
 
     }
 
-    public void firebaseByServiceSearch(String serviceName){
+    public void firebaseByServiceSearch(String serviceName) {
         final String searchedServiceName = serviceName;
         final ArrayList<String> getProvidersList = new ArrayList<String>();
         FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent( // fill the list with services
@@ -186,57 +192,75 @@ public class ProviderSearch extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         //Get map of users in datasnapshot
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {           // search through all users
-                            if (String.valueOf(dsp.child("roleType").getValue()).equals("Service Provider")){       // find providers
+                            if (String.valueOf(dsp.child("roleType").getValue()).equals("Service Provider")) {       // find providers
                                 for (DataSnapshot dsp2 : dataSnapshot.child(dsp.getKey()).child("myServices").getChildren()) {   // search through found providers services
                                     //if(String.valueOf(dsp2.child("serviceName").getValue()).equals(searchedServiceName)){   // does provider provide service searched for?
-                                        //Beginning of TIME FILTER
-                                        if(timeslot!= null){
-                                            for (DataSnapshot dsp3 : dataSnapshot.child(dsp.getKey()).child("myTimes").getChildren()){
-                                                if (Integer.valueOf(String.valueOf(dsp3.child("year").getValue())) == timeslot.getYear() && Integer.valueOf(String.valueOf(dsp3.child("month").getValue())) == timeslot.getMonth() && Integer.valueOf(String.valueOf(dsp3.child("day").getValue())) == timeslot.getDay()){
-                                                    if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) < timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) > timeslot.getEHour()){
-                                                        //tester = String.valueOf(dsp.child("username").getValue());
+                                    //Beginning of TIME FILTER
+                                    if (timeslot != null) {
+                                        for (DataSnapshot dsp3 : dataSnapshot.child(dsp.getKey()).child("myTimes").getChildren()) {
+                                            if (Integer.valueOf(String.valueOf(dsp3.child("year").getValue())) == timeslot.getYear() && Integer.valueOf(String.valueOf(dsp3.child("month").getValue())) == timeslot.getMonth() && Integer.valueOf(String.valueOf(dsp3.child("day").getValue())) == timeslot.getDay()) {
+                                                if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) < timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) > timeslot.getEHour()) {
+                                                    //tester = String.valueOf(dsp.child("username").getValue());
+                                                    getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
+                                                } else if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) == timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) > timeslot.getEHour()) {
+                                                    if (Integer.valueOf(String.valueOf(dsp3.child("sMinute").getValue())) <= timeslot.getSMinute()) {
                                                         getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
                                                     }
-                                                    else if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) == timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) > timeslot.getEHour() ){
-                                                        if (Integer.valueOf(String.valueOf(dsp3.child("sMinute").getValue())) <= timeslot.getSMinute()){
-                                                            getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
-                                                        }
+                                                } else if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) < timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) == timeslot.getEHour()) {
+                                                    if (Integer.valueOf(String.valueOf(dsp3.child("eMinute").getValue())) >= timeslot.getEMinute()) {
+                                                        getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
                                                     }
-                                                    else if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) < timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) == timeslot.getEHour() ) {
-                                                        if (Integer.valueOf(String.valueOf(dsp3.child("eMinute").getValue())) >= timeslot.getEMinute()) {
-                                                            getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
-                                                        }
-                                                    }
-                                                    else if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) == timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) == timeslot.getEHour() ) {
-                                                        if (Integer.valueOf(String.valueOf(dsp3.child("sMinute").getValue())) <= timeslot.getSMinute() && Integer.valueOf(String.valueOf(dsp3.child("eMinute").getValue())) >= timeslot.getEMinute()) {
-                                                            getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
-                                                        }
+                                                } else if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) == timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) == timeslot.getEHour()) {
+                                                    if (Integer.valueOf(String.valueOf(dsp3.child("sMinute").getValue())) <= timeslot.getSMinute() && Integer.valueOf(String.valueOf(dsp3.child("eMinute").getValue())) >= timeslot.getEMinute()) {
+                                                        getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
                                                     }
                                                 }
                                             }
                                         }
-                                        //END OF TIME FILTER
-                                        else {
-                                            getProvidersList.add(String.valueOf(dsp.child("username").getValue()));    // add provider name to list
-                                        }
+                                    }
+                                    if (rating > 0) {//this is where we look through snapshots and see if te rating is good enough for the search parameters
+                                        /*
+                                        * for (DataSnapshot snapshot : allSnapshotsOfRatings){
+                                        *   if (rating>= snapshot.rating){
+                                        *        getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
+                                        *   }
+                                        * }
+                                        *
+                                        *
+                                        * TODO or this
+                                        *
+                                        * for (DataSnapshot snapshot : allSnapshotsOfRatings){
+                                         *   if (rating < snapshot.rating){
+                                         *        getProvidersList.remove(String.valueOf(dsp.child("username").getValue()));
+                                         *   }
+                                         * }
+                                        *
+                                        * 
+                                        * */
+                                    }
+                                    //END OF TIME FILTER
+                                    else {
+                                        getProvidersList.add(String.valueOf(dsp.child("username").getValue()));    // add provider name to list
+                                    }
                                     //}
                                 }
                             }
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         //handle databaseError
                     }
                 });
 
-        ArrayAdapter<String> temp = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getProvidersList);
+        ArrayAdapter<String> temp = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getProvidersList);
         temp.setDropDownViewResource(android.R.layout.activity_list_item);
         mResultList.setAdapter(temp);
 
     }
 
-    public void firebaseByRateSearch(String serviceName){
+    public void firebaseByRateSearch(String serviceName) {
         final String searchedServiceName = serviceName;
         final ArrayList<String> getRatingsList = new ArrayList<String>();
         FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent( // fill the list with services
@@ -245,22 +269,23 @@ public class ProviderSearch extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         //Get map of users in datasnapshot
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {           // search through all users
-                           if (String.valueOf(dsp.child("roleType").getValue()).equals("Service Provider")){       // find providers
-                               for (DataSnapshot dsp2 : dataSnapshot.child(dsp.getKey()).child("myServices").getChildren()) {   // search through found providers services
-                                   if(String.valueOf(dsp2.child("serviceName").getValue()).equals(searchedServiceName)){   // does provider provide service searched for?
-                                       getRatingsList.add(String.valueOf(dsp.child("username").getValue()) + " " +String.valueOf(dsp2.child("rating").getValue()));    // add provider name and rating to list
+                            if (String.valueOf(dsp.child("roleType").getValue()).equals("Service Provider")) {       // find providers
+                                for (DataSnapshot dsp2 : dataSnapshot.child(dsp.getKey()).child("myServices").getChildren()) {   // search through found providers services
+                                    if (String.valueOf(dsp2.child("serviceName").getValue()).equals(searchedServiceName)) {   // does provider provide service searched for?
+                                        getRatingsList.add(String.valueOf(dsp.child("username").getValue()) + " " + String.valueOf(dsp2.child("rating").getValue()));    // add provider name and rating to list
                                         //TODO ratings need to be added to database to be searched
-                                   }
-                               }
-                           }
+                                    }
+                                }
+                            }
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         //handle databaseError
                     }
                 });
-        ArrayAdapter<String> temp = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getRatingsList);
+        ArrayAdapter<String> temp = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getRatingsList);
         temp.setDropDownViewResource(android.R.layout.activity_list_item);
         mResultList.setAdapter(temp);
 
@@ -268,7 +293,7 @@ public class ProviderSearch extends AppCompatActivity {
 
     //View Holder Class
 
-    public static class ServicesViewHolder extends RecyclerView.ViewHolder{
+    public static class ServicesViewHolder extends RecyclerView.ViewHolder {
         View mView;
 
         public ServicesViewHolder(@NonNull View itemView) {
@@ -277,17 +302,16 @@ public class ProviderSearch extends AppCompatActivity {
             mView = itemView;
         }
 
-        public void setDetails(String serviceName){
+        public void setDetails(String serviceName) {
 
             TextView service_name = (TextView) mView.findViewById(R.id.ServiceName);
             //TextView rating = (TextView) mView.findViewById(R.id.Rating);
-           // TextView hourly_rate = (TextView) mView.findViewById(R.id.Hourly_Rate);
+            // TextView hourly_rate = (TextView) mView.findViewById(R.id.Hourly_Rate);
 
             service_name.setText(serviceName);
             //hourly_rate.setText(hourlyRate);
         }
     }
-
 
 
 }
