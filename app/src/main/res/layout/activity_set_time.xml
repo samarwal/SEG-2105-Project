@@ -156,42 +156,42 @@
         app:layout_constraintVertical_bias="0.879">
 
         <RadioButton
-            android:id="@+id/0Stars"
+            android:id="@+id/stars0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="0" />
 
         <RadioButton
-            android:id="@+id/1Stars"
+            android:id="@+id/stars1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="1" />
 
         <RadioButton
-            android:id="@+id/2Stars"
+            android:id="@+id/stars2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="2" />
 
         <RadioButton
-            android:id="@+id/3Stars"
+            android:id="@+id/stars3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="3" />
 
         <RadioButton
-            android:id="@+id/4Stars"
+            android:id="@+id/stars4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="4" />
 
         <RadioButton
-            android:id="@+id/5Stars"
+            android:id="@+id/stars5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
