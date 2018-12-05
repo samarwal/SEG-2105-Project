@@ -44,6 +44,7 @@ public class ProviderSearch extends AppCompatActivity {
     private ListView mResultList;
     private DatabaseReference mUserDatabase;
     private Timeslot timeslot;
+    String tester;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +65,15 @@ public class ProviderSearch extends AppCompatActivity {
 //        mSearchBtn = (Button) findViewById(R.id.addTime);
 //        mResultList = (RecyclerView) findViewById(R.id.result_list);
         Intent intent = getIntent();
-
+        tester = String.valueOf(intent.getStringExtra("1"));
         //INFORMATION TRANSFER
+
         if (intent.getStringExtra("1") != null){
-            timeslot = new Timeslot(Integer.valueOf(intent.getStringExtra("4")), Integer.valueOf(intent.getStringExtra("5")), Integer.valueOf(intent.getStringExtra("6")), Integer.valueOf(intent.getStringExtra("7")));
-            timeslot.setYear(Integer.valueOf(intent.getStringExtra("1")));
-            timeslot.setMonth(Integer.valueOf(intent.getStringExtra("2")));
-            timeslot.setDay(Integer.valueOf(intent.getStringExtra("3")));
+            tester = String.valueOf(intent.getStringExtra("4"));
+            timeslot = new Timeslot(Integer.valueOf(String.valueOf(intent.getStringExtra("4"))), Integer.valueOf(String.valueOf(intent.getStringExtra("5"))), Integer.valueOf(String.valueOf(intent.getStringExtra("6"))), Integer.valueOf(String.valueOf(intent.getStringExtra("7"))));
+            timeslot.setYear(Integer.valueOf(String.valueOf(intent.getStringExtra("1"))));
+            timeslot.setMonth(Integer.valueOf(String.valueOf(intent.getStringExtra("2"))));
+            timeslot.setDay(Integer.valueOf(String.valueOf(intent.getStringExtra("3"))));
         }
 
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +173,35 @@ public class ProviderSearch extends AppCompatActivity {
                             if (String.valueOf(dsp.child("roleType").getValue()).equals("Service Provider")){       // find providers
                                 for (DataSnapshot dsp2 : dataSnapshot.child(dsp.getKey()).child("myServices").getChildren()) {   // search through found providers services
                                     if(String.valueOf(dsp2.child("serviceName").getValue()).equals(searchedServiceName)){   // does provider provide service searched for?
-                                        getProvidersList.add(String.valueOf(dsp.child("username").getValue()));    // add provider name to list
+                                        //Beginning of TIME FILTER
+                                        if(timeslot!= null){
+                                            for (DataSnapshot dsp3 : dsp.child("myTimes").getChildren()){
+                                                if (Integer.valueOf(String.valueOf(dsp3.child("year").getValue())) == timeslot.getYear() && Integer.valueOf(String.valueOf(dsp3.child("month").getValue())) == timeslot.getMonth() && Integer.valueOf(String.valueOf(dsp3.child("day").getValue())) == timeslot.getDay()){
+                                                    if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) < timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) > timeslot.getEHour()){
+                                                        getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
+                                                    }
+                                                    else if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) == timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) > timeslot.getEHour() ){
+                                                        if (Integer.valueOf(String.valueOf(dsp3.child("sMinute").getValue())) <= timeslot.getSMinute()){
+                                                            getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
+                                                        }
+                                                    }
+                                                    else if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) < timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) == timeslot.getEHour() ) {
+                                                        if (Integer.valueOf(String.valueOf(dsp3.child("eMinute").getValue())) >= timeslot.getEMinute()) {
+                                                            getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
+                                                        }
+                                                    }
+                                                    else if (Integer.valueOf(String.valueOf(dsp3.child("sHour").getValue())) == timeslot.getSHour() && Integer.valueOf(String.valueOf(dsp3.child("eHour").getValue())) == timeslot.getEHour() ) {
+                                                        if (Integer.valueOf(String.valueOf(dsp3.child("sMinute").getValue())) <= timeslot.getSMinute() && Integer.valueOf(String.valueOf(dsp3.child("eMinute").getValue())) >= timeslot.getEMinute()) {
+                                                            getProvidersList.add(String.valueOf(dsp.child("username").getValue()));
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        //END OF TIME FILTER
+                                        else {
+                                            getProvidersList.add(String.valueOf(dsp.child("username").getValue()));    // add provider name to list
+                                        }
                                     }
                                 }
                             }
@@ -181,6 +212,7 @@ public class ProviderSearch extends AppCompatActivity {
                         //handle databaseError
                     }
                 });
+
         ArrayAdapter<String> temp = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getProvidersList);
         temp.setDropDownViewResource(android.R.layout.activity_list_item);
         mResultList.setAdapter(temp);

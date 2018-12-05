@@ -53,13 +53,13 @@ public class SetTime extends Activity {
                     timeslot.setDay(day);
                     //DATA TRANSFER IS HERE. ENTER intent.putExtra("KEY", DATA)
                     Intent intent = new Intent(SetTime.this, ProviderSearch.class);
-                    intent.putExtra("1", timeslot.getYear());
-                    intent.putExtra("2", timeslot.getMonth());
-                    intent.putExtra("3", timeslot.getDay());
-                    intent.putExtra("4", timeslot.getSHour());
-                    intent.putExtra("5", timeslot.getSMinute());
-                    intent.putExtra("6", timeslot.getEHour());
-                    intent.putExtra("7", timeslot.getEMinute());
+                    intent.putExtra("1", String.valueOf(timeslot.getYear()));
+                    intent.putExtra("2", String.valueOf (timeslot.getMonth()));
+                    intent.putExtra("3", String.valueOf(timeslot.getDay()));
+                    intent.putExtra("4", String.valueOf(timeslot.getSHour()));
+                    intent.putExtra("5", String.valueOf(timeslot.getSMinute()));
+                    intent.putExtra("6", String.valueOf(timeslot.getEHour()));
+                    intent.putExtra("7", String.valueOf(timeslot.getEMinute()));
                     startActivity(intent);
 
                 }
