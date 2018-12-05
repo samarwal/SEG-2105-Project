@@ -1,20 +1,26 @@
 package com.example.group.ondemandhomerepair;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Booking {
 
 
     private String usersName;
-    private String providersName;
+    private String providerName;
+    private String serviceName;
     private String bookingTimes;
-
-    private User user;
-    private ProviderProfile provider;
-    private Service service;
+    private String date;
 
     public Booking (String user, String provider, String times){
         usersName = user;
-        providersName = provider;
+        providerName = provider;
         bookingTimes = times;
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateOb = new Date();
+
+        date = formatter.format(dateOb);
 
     }
 
@@ -23,11 +29,19 @@ public class Booking {
     }
 
     public String getProvider(){
-        return this.providersName;
+        return this.providerName;
+    }
+
+    public String getService(){
+        return this.serviceName;
     }
 
     public String getTimes(){
         return this.bookingTimes;
+    }
+
+    public String getDate(){
+        return this.date;
     }
 
     public void setUser(String u){
@@ -35,7 +49,11 @@ public class Booking {
     }
 
     public void setProvider(String p){
-        this.providersName = p;
+        this.providerName = p;
+    }
+
+    public void setService(String s){
+        this.serviceName = s;
     }
 
     public void setTimes(String s){
@@ -43,6 +61,6 @@ public class Booking {
     }
 
     public String toString(){
-        return ("Your name: " + usersName +  ", Provider: " + providersName + " Booked times: " + bookingTimes);
+        return ("Your name: " + usersName +  ", Provider: " + providerName + ", Service: " + providerName + ", Booked times: " + bookingTimes);
     }
 }

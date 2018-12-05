@@ -19,7 +19,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RateServicePage extends AppCompatActivity {
 
@@ -44,6 +47,28 @@ public class RateServicePage extends AppCompatActivity {
             public void onClick(View v) {
                 ratingResultTextView.setText("Your rating is: " + ratingBar.getRating());
                 rating = ratingBar.getRating();
+                /**
+                if(Validate(providerSerivceinput.getText().toString().trim())){ // check if the text is empty
+                    FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myServices").addListenerForSingleValueEvent(    // get the info of the provider
+                            new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                                        if(providerSerivceinput.getText().toString().trim().equals(dsp.child("serviceName").getValue().toString())){
+                                            FirebaseDatabase.getInstance().getReference("Users").child(providerID)
+                                                    .child("myServices").child(dsp.getKey()).removeValue();
+
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            }
+                    );
+                }**/
             }
         });
     }

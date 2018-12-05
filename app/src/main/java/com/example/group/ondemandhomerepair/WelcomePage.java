@@ -60,6 +60,9 @@ public class WelcomePage extends AppCompatActivity {
         Button searchProvider = (Button) findViewById(R.id.searchProv);
         searchProvider.setVisibility(View.GONE);
 
+        Button bookingHistoryButton = (Button) findViewById(R.id.btnBookingHistory);
+        searchProvider.setVisibility(View.GONE);
+
         final Intent intent = getIntent();                                    // create intent by taking from previous intent
 
         TextView userName = (TextView)findViewById(R.id.userField);        // get text views
@@ -127,6 +130,13 @@ public class WelcomePage extends AppCompatActivity {
                 @Override
                 public void onClick(View v){
                     startActivity(new Intent(WelcomePage.this, ProviderSearch.class));
+                }
+            });
+            bookingHistoryButton.setVisibility(View.VISIBLE);
+            bookingHistoryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    openUserHistory();
                 }
             });
         }
@@ -206,6 +216,12 @@ public class WelcomePage extends AppCompatActivity {
 
     public void openProviderSearch(){
         Intent intent = new Intent(this, ProviderSearch.class);
+        startActivity(intent);
+    }
+
+    public void openUserHistory(){
+        Intent intent = new Intent(this, UserHistoryPage.class);
+        //intent.putExtra(EXTRA_TEXT1);
         startActivity(intent);
     }
 
