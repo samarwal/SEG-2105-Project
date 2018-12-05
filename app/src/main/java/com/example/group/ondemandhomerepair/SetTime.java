@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class SetTime extends Activity {
@@ -15,6 +17,7 @@ public class SetTime extends Activity {
     private EditText startMinute;
     private EditText endHour;
     private EditText endMinute;
+    private RadioGroup radGroup;
     private int year;
     private int month;
     private int day;
@@ -30,6 +33,7 @@ public class SetTime extends Activity {
         endHour = findViewById(R.id.startHour2);
         endMinute = findViewById(R.id.endMinute2);
         Button setTime = findViewById(R.id.setTime);
+        radGroup = findViewById(R.id.radioGroup);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -52,6 +56,16 @@ public class SetTime extends Activity {
                     timeslot.setMonth(month);
                     timeslot.setDay(day);
                     //DATA TRANSFER IS HERE. ENTER intent.putExtra("KEY", DATA)
+
+
+                    //rating select idea start
+                    int selectedRadio = radGroup.getCheckedRadioButtonId();
+                    RadioButton selectedType = (RadioButton)findViewById(selectedRadio);
+                    String rating = selectedType.getText().toString();//rating is a string containing an int of how many stars is the min to show up in the search
+
+                    //rating select idea end
+
+
                     Intent intent = new Intent(SetTime.this, ProviderSearch.class);
                     intent.putExtra("1", timeslot.getYear());
                     intent.putExtra("2", timeslot.getMonth());
@@ -67,6 +81,8 @@ public class SetTime extends Activity {
 
         });
     }
+
+
 
     public boolean statusValidate() {
         if (startHour.getText().toString().equals("") || startMinute.getText().toString().equals("") || endMinute.getText().toString().equals("") || endHour.getText().toString().equals("")) {
