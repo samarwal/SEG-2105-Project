@@ -26,7 +26,7 @@ public class RateServicePage extends AppCompatActivity {
     private float rating;
     private String comment;
     private String providerName;
-    private String serviceName;
+    //private String serviceName;
     //Transfer the Provider's name and the Service's Name from the User's History Activity
 
     @Override
@@ -77,7 +77,7 @@ public class RateServicePage extends AppCompatActivity {
                                                     @Override
                                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                                         for (DataSnapshot dsp2 : dataSnapshot.getChildren()) {
-                                                            if(serviceName.equals(String.valueOf(dsp.child("serviceName").getValue().toString()))){
+                                                            if(serviceName.equals(String.valueOf(dsp2.child("serviceName").getValue().toString()))){
                                                                 final String serviceID = dsp2.getKey();
 
                                                                 FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myServices").child(serviceID)
