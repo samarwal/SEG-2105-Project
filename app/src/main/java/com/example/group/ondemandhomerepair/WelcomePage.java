@@ -140,7 +140,8 @@ public class WelcomePage extends AppCompatActivity {
             bookingHistoryButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
-                    openUserHistory();
+                    String usersName = String.valueOf(userName.getText());
+                    openUserHistory(usersName);
                 }
             });
         }
@@ -223,9 +224,9 @@ public class WelcomePage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openUserHistory(){
+    public void openUserHistory(String usersName){
         Intent intent = new Intent(this, UserHistoryPage.class);
-        //intent.putExtra(EXTRA_TEXT1);
+        intent.putExtra(EXTRA_TEXT1, usersName);
         startActivity(intent);
     }
 
