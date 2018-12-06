@@ -34,6 +34,8 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 import static android.content.Intent.EXTRA_TEXT;
+import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT1;
+import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT2;
 
 
 public class ProviderSearch extends AppCompatActivity {
@@ -47,6 +49,8 @@ public class ProviderSearch extends AppCompatActivity {
     private DatabaseReference mUserDatabase;
     private Timeslot timeslot;
     private int rating;
+    private String lastServiceEntered = "";
+    private String usersName;
     String tester;
 
     @Override
@@ -68,6 +72,7 @@ public class ProviderSearch extends AppCompatActivity {
 //        mSearchBtn = (Button) findViewById(R.id.addTime);
 //        mResultList = (RecyclerView) findViewById(R.id.result_list);
         Intent intent = getIntent();
+        usersName = intent.getStringExtra(EXTRA_TEXT1);// get the username of the user sent from welcomePage
         tester = String.valueOf(intent.getStringExtra("1"));
         //INFORMATION TRANSFER
 
@@ -103,6 +108,7 @@ public class ProviderSearch extends AppCompatActivity {
 
         mSearchForProvider.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                lastServiceEntered = String.valueOf(mSearchField.getText());
                 String searchText = mSearchField.getText().toString();
                 firebaseByServiceSearch(searchText);
             }
@@ -117,9 +123,13 @@ public class ProviderSearch extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String username = String.valueOf(adapterView.getItemAtPosition(i));
+                String serviceName = lastServiceEntered;
+                String UsersName = usersName;
                 if (username.indexOf('@') >= 0) { // check if selected option is a provider
                     Intent intent = new Intent(ProviderSearch.this, UserGetProviderInfo.class);
-                    intent.putExtra(EXTRA_TEXT, username);
+                    intent.putExtra(EXTRA_TEXT, username); //send provider name
+                    intent.putExtra(EXTRA_TEXT1, serviceName);//send service name
+                    intent.putExtra(EXTRA_TEXT2, UsersName);//send users name
                     startActivity(intent);
                 }
             }

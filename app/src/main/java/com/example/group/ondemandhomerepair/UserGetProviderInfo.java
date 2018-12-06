@@ -3,13 +3,17 @@ package com.example.group.ondemandhomerepair;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -18,12 +22,15 @@ import java.util.List;
 
 import static android.content.Intent.EXTRA_TEXT;
 import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT1;
+import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT2;
 
 public class UserGetProviderInfo extends AppCompatActivity {
 
+    TextView selectedTiming;
     TextView providerUser;
     TextView providerDisplay;
     ListView TimesDisplayer;
+    Button bookAService;
     String uid;
     final ArrayList<String> displayTimes = new ArrayList<String>();
     final ArrayList<Timeslot> timesList = new ArrayList<Timeslot>();
@@ -36,13 +43,52 @@ public class UserGetProviderInfo extends AppCompatActivity {
 
         final Intent intent = getIntent();
 
+        selectedTiming = (TextView)findViewById(R.id.textView19);
         providerUser = (TextView)findViewById(R.id.myTextView);
         providerDisplay= (TextView)findViewById(R.id.infoField);
         TimesDisplayer = (ListView)findViewById(R.id.timesListings);
+        bookAService = (Button)findViewById(R.id.BookButt);
         providerUser.setText(intent.getStringExtra(EXTRA_TEXT));
         final String providerUsername = intent.getStringExtra(EXTRA_TEXT);
 
 
+        TimesDisplayer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedTime = String.valueOf(adapterView.getItemAtPosition(i));
+                selectedTiming.setText(selectedTime);
+                //Toast.makeText(UserGetProviderInfo.this, selectedTime, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        bookAService.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                final String usersName = intent.getStringExtra(EXTRA_TEXT2); // get usersname
+                String providersName = String.valueOf(providerUser.getText());     //get providers anme
+                String bookTimes = String.valueOf(selectedTiming.getText());
+                String service = intent.getStringExtra(EXTRA_TEXT1);
+                final Booking sendBook = new Booking(usersName,providersName,bookTimes,service);
+                Toast.makeText(UserGetProviderInfo.this, usersName, Toast.LENGTH_SHORT).show();
+                FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot dsp : dataSnapshot.getChildren()){
+                            if(dsp.child("username").getValue().equals(usersName)){
+                                FirebaseDatabase.getInstance().getReference("Users").child(dsp.getKey()).child("bookingHistory").push().setValue(sendBook);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        });
 
         FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent( // get the ID of the provider in firebase
                 new ValueEventListener() {

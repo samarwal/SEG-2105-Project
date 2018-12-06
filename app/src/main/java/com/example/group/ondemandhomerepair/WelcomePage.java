@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import static android.content.Intent.EXTRA_TEXT;
 import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT1;
 
 public class WelcomePage extends AppCompatActivity {
@@ -65,7 +66,7 @@ public class WelcomePage extends AppCompatActivity {
 
         final Intent intent = getIntent();                                    // create intent by taking from previous intent
 
-        TextView userName = (TextView)findViewById(R.id.userField);        // get text views
+        final TextView userName = (TextView)findViewById(R.id.userField);        // get text views
         TextView userType = (TextView)findViewById(R.id.typeField);
 
         userName.setText(intent.getStringExtra(EXTRA_TEXT1));           // get username from EXTRA_TEXT1 of intent
@@ -129,7 +130,10 @@ public class WelcomePage extends AppCompatActivity {
             searchProvider.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
-                    startActivity(new Intent(WelcomePage.this, ProviderSearch.class));
+                    Intent intent = new Intent(WelcomePage.this, ProviderSearch.class);
+                    String usersName = String.valueOf(userName.getText());  // get the username of the user and send it to search page
+                    intent.putExtra(EXTRA_TEXT1, usersName);
+                    startActivity(intent);  // go to the provider search page
                 }
             });
             bookingHistoryButton.setVisibility(View.VISIBLE);
