@@ -80,7 +80,7 @@ public class RateServicePage extends AppCompatActivity {
                                                             if(serviceName.equals(String.valueOf(dsp2.child("serviceName").getValue().toString()))){
                                                                 final String serviceID = dsp2.getKey();
 
-                                                                FirebaseDatabase.getInstance().getReference("Users").child(providerID).child("myServices").child(serviceID)
+                                                                FirebaseDatabase.getInstance().getReference("Users").child(dsp.getKey()).child("myServices").child(dsp2.getKey())
                                                                        .child("Ratings").push().setValue(rateOb);
                                                             }
                                                         }
