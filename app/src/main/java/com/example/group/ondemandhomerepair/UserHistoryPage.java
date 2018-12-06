@@ -23,22 +23,73 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
+import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT1;
 
 public class UserHistoryPage extends AppCompatActivity {
 
     //private static final Object RateServicePage = ;
-    Booking[] bookings;
+    private ArrayList<Booking> bookings = new ArrayList<Booking>();
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_history_page);
 
+        final Intent intent = getIntent();
+        final String userName = intent.getStringExtra(EXTRA_TEXT1);
+
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        CustomAdapter customAdapter = new CustomAdapter();
+        FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(    // get the ID of the provider in firebase
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                            if(userName.equals(String.valueOf(dsp.child("username").getValue().toString())) && dsp.child("roleType").getValue().toString().equals("Service Provider")){  //find the provider in firebase and get ID
+                                userID = dsp.getKey();
+                            }
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                }
+        );
+
+        FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("bookingHistory").addListenerForSingleValueEvent( // fill the list with services
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                            Booking temp = new Booking("fill","fill", "fill", "fill");
+                            temp.setUser(String.valueOf(dsp.child("user").getValue()));
+                            temp.setProvider(String.valueOf(dsp.child("provider").getValue()));
+                            temp.setService(String.valueOf(dsp.child("service").getValue()));
+                            temp.setTimes(String.valueOf(dsp.child("times").getValue()));
+                            temp.setTimes(String.valueOf(dsp.child("date").getValue()));
+                            bookings.add(temp);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                    }
+        });
+
+
+
+        CustomAdapter customAdapter = new CustomAdapter(bookings);
         listView.setAdapter(customAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,6 +102,11 @@ public class UserHistoryPage extends AppCompatActivity {
 
     class CustomAdapter extends BaseAdapter {
 
+        private ArrayList<Booking> bookingList = new ArrayList<Booking>();
+
+        public CustomAdapter(ArrayList<Booking> bL) {
+            bookingList = bL;
+        }
 
         @Override
         public int getCount() {
@@ -76,9 +132,9 @@ public class UserHistoryPage extends AppCompatActivity {
             TextView txtDate = (TextView) view.findViewById(R.id.txtDate);
             TextView txtRatePrompt = (TextView) view.findViewById(R.id.txtRatePrompt);
 
-            txtProvName.setText(bookings[i].getProvider());
-            txtServName.setText(bookings[i].getService());
-            txtDate.setText(bookings[i].getDate());
+            txtProvName.setText(bookingList.get(i).getProvider());
+            txtServName.setText(bookings.get(i).getService());
+            txtDate.setText(bookings.get(i).getDate());
             return null;
         }
     }

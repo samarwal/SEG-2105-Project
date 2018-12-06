@@ -61,6 +61,10 @@ public class Booking {
         this.bookingTimes = s;
     }
 
+    public void setDate(String s){
+        this.date = s;
+    }
+
     public String toString(){
         return ("Your name: " + usersName +  ", Provider: " + providerName + ", Service: " + providerName + ", Booked times: " + bookingTimes);
     }
