@@ -37,8 +37,11 @@ public class UserHistoryPage extends AppCompatActivity {
 
     //private static final Object RateServicePage = ;
     private ArrayList<String> bookings = new ArrayList<String>();
+    private ArrayList<Booking> listOfBookings = new ArrayList<Booking>();
     private String userID;
     ListView listView;
+    public static final String EXTRA_TEXT2 = "com.example.group.ondemandhomerepair.EXTRA_TEXT2";
+    public static final String EXTRA_TEXT3 = "com.example.group.ondemandhomerepair.EXTRA_TEXT3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -71,6 +74,7 @@ public class UserHistoryPage extends AppCompatActivity {
                                                         temp.setTimes(String.valueOf(dsp.child("times").getValue()));
                                                         temp.setTimes(String.valueOf(dsp.child("date").getValue()));
                                                         bookings.add(temp.toString());
+                                                        listOfBookings.add(temp);
 
                                                     }
                                                     //CustomAdapter customAdapter = new CustomAdapter(bookings);
@@ -111,7 +115,11 @@ public class UserHistoryPage extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(view.getContext(), RateServicePage.class);
+                Intent intent = new Intent(UserHistoryPage.this, RateServicePage.class);
+                intent.putExtra(EXTRA_TEXT1, userName);
+                intent.putExtra(EXTRA_TEXT2, listOfBookings.get(i).getProvider());
+                intent.putExtra(EXTRA_TEXT3, listOfBookings.get(i).getService());
+                startActivity(intent);  // go to the provider search page
             }
         });
     }
