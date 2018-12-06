@@ -63,7 +63,7 @@ public class ProviderSearch extends AppCompatActivity {
         mSearchField = (EditText) findViewById(R.id.search_field);
 
         mSearchBtn = (Button) findViewById(R.id.addTime);
-        mSearchByRate = (Button) findViewById(R.id.rateSearchButt);
+        //mSearchByRate = (Button) findViewById(R.id.rateSearchButt);
         mSearchForProvider = (Button) findViewById((R.id.button5));
         mResultList = (ListView) findViewById(R.id.listings);
         mEditTimeButton = findViewById(R.id.button4);
@@ -97,14 +97,14 @@ public class ProviderSearch extends AppCompatActivity {
             }
         });
 
-        mSearchByRate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(ProviderSearch.this, tester, Toast.LENGTH_SHORT).show();
-                String searchText = mSearchField.getText().toString();
-                firebaseByRateSearch(searchText);
-            }
-        });
+//        mSearchByRate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Toast.makeText(ProviderSearch.this, tester, Toast.LENGTH_SHORT).show();
+//                String searchText = mSearchField.getText().toString();
+//                firebaseByRateSearch(searchText);
+//            }
+//        });
 
         mSearchForProvider.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -270,36 +270,36 @@ public class ProviderSearch extends AppCompatActivity {
 
     }
 
-    public void firebaseByRateSearch(String serviceName) {
-        final String searchedServiceName = serviceName;
-        final ArrayList<String> getRatingsList = new ArrayList<String>();
-        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent( // fill the list with services
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        //Get map of users in datasnapshot
-                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {           // search through all users
-                            if (String.valueOf(dsp.child("roleType").getValue()).equals("Service Provider")) {       // find providers
-                                for (DataSnapshot dsp2 : dataSnapshot.child(dsp.getKey()).child("myServices").getChildren()) {   // search through found providers services
-                                    if (String.valueOf(dsp2.child("serviceName").getValue()).equals(searchedServiceName)) {   // does provider provide service searched for?
-                                        getRatingsList.add(String.valueOf(dsp.child("username").getValue()) + " " + String.valueOf(dsp2.child("rating").getValue()));    // add provider name and rating to list
-                                        //TODO ratings need to be added to database to be searched
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        //handle databaseError
-                    }
-                });
-        ArrayAdapter<String> temp = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getRatingsList);
-        temp.setDropDownViewResource(android.R.layout.activity_list_item);
-        mResultList.setAdapter(temp);
-
-    }
+//    public void firebaseByRateSearch(String serviceName) {
+//        final String searchedServiceName = serviceName;
+//        final ArrayList<String> getRatingsList = new ArrayList<String>();
+//        FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent( // fill the list with services
+//                new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        //Get map of users in datasnapshot
+//                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {           // search through all users
+//                            if (String.valueOf(dsp.child("roleType").getValue()).equals("Service Provider")) {       // find providers
+//                                for (DataSnapshot dsp2 : dataSnapshot.child(dsp.getKey()).child("myServices").getChildren()) {   // search through found providers services
+//                                    if (String.valueOf(dsp2.child("serviceName").getValue()).equals(searchedServiceName)) {   // does provider provide service searched for?
+//                                        getRatingsList.add(String.valueOf(dsp.child("username").getValue()) + " " + String.valueOf(dsp2.child("rating").getValue()));    // add provider name and rating to list
+//                                        //TODO ratings need to be added to database to be searched
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        //handle databaseError
+//                    }
+//                });
+//        ArrayAdapter<String> temp = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getRatingsList);
+//        temp.setDropDownViewResource(android.R.layout.activity_list_item);
+//        mResultList.setAdapter(temp);
+//
+//    }
 
     //View Holder Class
 
