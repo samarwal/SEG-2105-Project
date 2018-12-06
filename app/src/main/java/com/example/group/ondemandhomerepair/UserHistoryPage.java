@@ -110,7 +110,7 @@ public class UserHistoryPage extends AppCompatActivity {
 
 
 
-       ;
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
