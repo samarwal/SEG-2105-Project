@@ -69,7 +69,7 @@ public class UserGetProviderInfo extends AppCompatActivity {
                 String providersName = String.valueOf(providerUser.getText());     //get providers anme
                 String bookTimes = String.valueOf(selectedTiming.getText());
                 String service = intent.getStringExtra(EXTRA_TEXT1);
-                final Booking sendBook = new Booking(usersName,providersName,bookTimes,service);
+                final Booking sendBook = new Booking(usersName,providersName,service,bookTimes);
                 Toast.makeText(UserGetProviderInfo.this, usersName, Toast.LENGTH_SHORT).show();
                 FirebaseDatabase.getInstance().getReference("Users").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

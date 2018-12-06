@@ -37,6 +37,7 @@ public class UserHistoryPage extends AppCompatActivity {
     //private static final Object RateServicePage = ;
     private ArrayList<Booking> bookings = new ArrayList<Booking>();
     private String userID;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,7 +47,7 @@ public class UserHistoryPage extends AppCompatActivity {
         final Intent intent = getIntent();
         final String userName = intent.getStringExtra(EXTRA_TEXT1);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
 
         FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(    // get the ID of the provider in firebase
                 new ValueEventListener() {
@@ -55,6 +56,28 @@ public class UserHistoryPage extends AppCompatActivity {
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                             if(userName.equals(String.valueOf(dsp.child("username").getValue().toString())) && dsp.child("roleType").getValue().toString().equals("Basic User")){  //find the provider in firebase and get ID
                                 userID = dsp.getKey();
+                                FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("bookingHistory").addListenerForSingleValueEvent( // fill the list with services
+                                        new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                                                    Booking temp = new Booking("fill","fill", "fill", "fill");
+                                                    temp.setUser(String.valueOf(dsp.child("user").getValue()));
+                                                    temp.setProvider(String.valueOf(dsp.child("provider").getValue()));
+                                                    temp.setService(String.valueOf(dsp.child("service").getValue()));
+                                                    temp.setTimes(String.valueOf(dsp.child("times").getValue()));
+                                                    temp.setTimes(String.valueOf(dsp.child("date").getValue()));
+                                                    bookings.add(temp);
+                                                    CustomAdapter customAdapter = new CustomAdapter(bookings);
+                                                    listView.setAdapter(customAdapter);
+                                                }
+                                            }
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                //handle databaseError
+                                            }
+                                        });
                             }
                         }
                     }
@@ -66,31 +89,11 @@ public class UserHistoryPage extends AppCompatActivity {
                 }
         );
 
-        FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("bookingHistory").addListenerForSingleValueEvent( // fill the list with services
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                            Booking temp = new Booking("fill","fill", "fill", "fill");
-                            temp.setUser(String.valueOf(dsp.child("user").getValue()));
-                            temp.setProvider(String.valueOf(dsp.child("provider").getValue()));
-                            temp.setService(String.valueOf(dsp.child("service").getValue()));
-                            temp.setTimes(String.valueOf(dsp.child("times").getValue()));
-                            temp.setTimes(String.valueOf(dsp.child("date").getValue()));
-                            bookings.add(temp);
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        //handle databaseError
-                    }
-        });
 
 
 
-        CustomAdapter customAdapter = new CustomAdapter(bookings);
-        listView.setAdapter(customAdapter);
+
+       ;
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
