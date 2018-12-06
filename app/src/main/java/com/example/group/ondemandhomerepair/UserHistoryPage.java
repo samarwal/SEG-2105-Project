@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,7 +36,7 @@ import static com.example.group.ondemandhomerepair.LogIn.EXTRA_TEXT1;
 public class UserHistoryPage extends AppCompatActivity {
 
     //private static final Object RateServicePage = ;
-    private ArrayList<Booking> bookings = new ArrayList<Booking>();
+    private ArrayList<String> bookings = new ArrayList<String>();
     private String userID;
     ListView listView;
 
@@ -60,18 +61,30 @@ public class UserHistoryPage extends AppCompatActivity {
                                         new ValueEventListener() {
                                             @Override
                                             public void onDataChange(DataSnapshot dataSnapshot) {
+                                                boolean checkMe = dataSnapshot.exists();
+                                                if(checkMe){
+                                                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                                                        Booking temp = new Booking("fill","fill", "fill", "fill");
+                                                        temp.setUser(String.valueOf(dsp.child("user").getValue()));
+                                                        temp.setProvider(String.valueOf(dsp.child("provider").getValue()));
+                                                        temp.setService(String.valueOf(dsp.child("service").getValue()));
+                                                        temp.setTimes(String.valueOf(dsp.child("times").getValue()));
+                                                        temp.setTimes(String.valueOf(dsp.child("date").getValue()));
+                                                        bookings.add(temp.toString());
 
-                                                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                                                    Booking temp = new Booking("fill","fill", "fill", "fill");
-                                                    temp.setUser(String.valueOf(dsp.child("user").getValue()));
-                                                    temp.setProvider(String.valueOf(dsp.child("provider").getValue()));
-                                                    temp.setService(String.valueOf(dsp.child("service").getValue()));
-                                                    temp.setTimes(String.valueOf(dsp.child("times").getValue()));
-                                                    temp.setTimes(String.valueOf(dsp.child("date").getValue()));
-                                                    bookings.add(temp);
-                                                    CustomAdapter customAdapter = new CustomAdapter(bookings);
-                                                    listView.setAdapter(customAdapter);
+                                                    }
+                                                    //CustomAdapter customAdapter = new CustomAdapter(bookings);
+                                                    ArrayAdapter<String>  basic = new ArrayAdapter<String>(UserHistoryPage.this, android.R.layout.simple_list_item_1, bookings);
+                                                    basic.setDropDownViewResource(android.R.layout.activity_list_item);
+                                                    listView.setAdapter(basic);
                                                 }
+                                                if(!checkMe){
+                                                    bookings.add("No past bookings");
+                                                    ArrayAdapter<String>  basic = new ArrayAdapter<String>(UserHistoryPage.this, android.R.layout.simple_list_item_1, bookings);
+                                                    basic.setDropDownViewResource(android.R.layout.activity_list_item);
+                                                    listView.setAdapter(basic);
+                                                }
+
                                             }
                                             @Override
                                             public void onCancelled(DatabaseError databaseError) {
@@ -136,8 +149,8 @@ public class UserHistoryPage extends AppCompatActivity {
             TextView txtRatePrompt = (TextView) view.findViewById(R.id.txtRatePrompt);
 
             txtProvName.setText(bookingList.get(i).getProvider());
-            txtServName.setText(bookings.get(i).getService());
-            txtDate.setText(bookings.get(i).getDate());
+            //txtServName.setText(bookings.get(i).getService());
+            //txtDate.setText(bookings.get(i).getDate());
             return null;
         }
     }
